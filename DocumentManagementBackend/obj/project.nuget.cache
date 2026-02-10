@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "kyw6DUZ3cy4=",
+  "success": true,
+  "projectFilePath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/DocumentManagementBackend/DocumentManagementBackend.csproj",
+  "expectedPackageFiles": [
+    "/Users/paunradu/.nuget/packages/microsoft.aspnetcore.openapi/9.0.12/microsoft.aspnetcore.openapi.9.0.12.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
