@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/DocumentManagementBackend.API/DocumentManagementBackend.API.csproj": {}
+    "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/DocumentManagementBackend.API.csproj": {}
   },
   "projects": {
-    "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/DocumentManagementBackend.API/DocumentManagementBackend.API.csproj": {
+    "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/DocumentManagementBackend.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/DocumentManagementBackend.API/DocumentManagementBackend.API.csproj",
+        "projectUniqueName": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/DocumentManagementBackend.API.csproj",
         "projectName": "DocumentManagementBackend.API",
-        "projectPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/DocumentManagementBackend.API/DocumentManagementBackend.API.csproj",
+        "projectPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/DocumentManagementBackend.API.csproj",
         "packagesPath": "/Users/paunradu/.nuget/packages/",
-        "outputPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/DocumentManagementBackend.API/obj/",
+        "outputPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/paunradu/.nuget/NuGet/NuGet.Config"
@@ -43,6 +43,12 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[9.0.12, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,6 +61,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
