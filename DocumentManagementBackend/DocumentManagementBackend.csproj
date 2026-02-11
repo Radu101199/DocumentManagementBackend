@@ -7,7 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+        <PackageReference Include="FsToolkit.ErrorHandling" Version="5.1.0" />
+        <PackageReference Include="MediatR" Version="14.0.0" />
+        <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="13.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.12"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.12" />
+        <PackageReference Include="RepositoryAndUnitOfWork" Version="1.0.0" />
+        <PackageReference Include="Serilog" Version="4.3.0" />
+        <PackageReference Include="Swashbuckle" Version="5.6.0" />
+        <PackageReference Include="Validation" Version="2.6.68" />
     </ItemGroup>
 
 </Project>
