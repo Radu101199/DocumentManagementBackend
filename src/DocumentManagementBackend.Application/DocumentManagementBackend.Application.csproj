@@ -7,8 +7,24 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Common\" />
-      <Folder Include="Features\" />
+      <Folder Include="Common\Behaviours\" />
+      <Folder Include="Common\Exceptions\" />
+      <Folder Include="Common\Mappings\" />
+      <Folder Include="Common\Models\" />
+      <Folder Include="Features\Documents\Commands\" />
+      <Folder Include="Features\Documents\Queries\" />
+      <Folder Include="Features\Notifications\Commands\" />
+      <Folder Include="Features\Notifications\Queries\" />
+      <Folder Include="Features\Users\Commands\" />
+      <Folder Include="Features\Users\Queries\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DocumentManagementBackend.Domain\DocumentManagementBackend.Domain.csproj" />
     </ItemGroup>
 
 </Project>
