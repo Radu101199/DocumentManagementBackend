@@ -15,7 +15,8 @@ public static class DependencyInjection
         // Adaugă DbContext cu PostgreSQL
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(
-                configuration.GetConnectionString("DefaultConnection")
+                configuration.GetConnectionString("DefaultConnection"),
+                npgsqlOptions => npgsqlOptions.MigrationsHistoryTable("__EFMigrationsHistory", "DocumentManagement")
             )
         );
         
