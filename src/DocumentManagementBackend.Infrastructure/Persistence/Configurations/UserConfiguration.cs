@@ -25,13 +25,22 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.PasswordHash)
             .IsRequired();
 
+        builder.Property(x => x.Role)
+            .IsRequired();
+
+        builder.Property(x => x.IsActive)
+            .IsRequired();
+
         builder.HasIndex(x => x.Email)
             .IsUnique();
+
+        // Ignore computed property
+        builder.Ignore(x => x.FullName);
 
         // Relationship: User -> Documents (one to many)
         builder.HasMany(x => x.Documents)
             .WithOne(x => x.Owner)
             .HasForeignKey(x => x.OwnerId)
-            .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

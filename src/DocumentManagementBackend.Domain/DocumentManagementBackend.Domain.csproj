@@ -7,8 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Events\" />
-      <Folder Include="Exceptions\" />
+      <Folder Include="Invariants\" />
       <Folder Include="ValueObjects\" />
     </ItemGroup>
 
