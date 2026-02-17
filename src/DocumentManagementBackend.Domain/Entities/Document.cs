@@ -114,8 +114,14 @@ public class Document : BaseAuditableEntity
 
     public void Approve(Guid approverId, string? notes = null)
     {
+        // Must have an active approval window
+        if (ApprovalRequestedAt == null || ApprovalExpiresAt == null)
+        {
+            throw new DocumentInvalidStateException(Id, Status.ToString(), "approve without requesting approval first");
+        }
+
         // Check if approval window is still valid
-        if (ApprovalExpiresAt.HasValue && DateTime.UtcNow > ApprovalExpiresAt.Value)
+        if (DateTime.UtcNow > ApprovalExpiresAt.Value)
         {
             throw new ApprovalWindowExpiredException(Id, ApprovalExpiresAt.Value);
         }

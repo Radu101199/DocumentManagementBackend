@@ -97,3 +97,7 @@
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Domain.UnitTests/obj/Debug/net9.0/DocumentManagementBackend.Domain.UnitTests.pdb
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Domain.UnitTests/obj/Debug/net9.0/DocumentManagementBackend.Domain.UnitTests.genruntimeconfig.cache
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Domain.UnitTests/obj/Debug/net9.0/ref/DocumentManagementBackend.Domain.UnitTests.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Domain.UnitTests/bin/Debug/net9.0/.msCoverageSourceRootsMapping_DocumentManagementBackend.Domain.UnitTests
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Domain.UnitTests/bin/Debug/net9.0/CoverletSourceRootsMapping_DocumentManagementBackend.Domain.UnitTests
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Domain.UnitTests/bin/Debug/net9.0/DocumentManagementBackend.Domain.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Domain.UnitTests/bin/Debug/net9.0/DocumentManagementBackend.Domain.pdb
