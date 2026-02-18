@@ -21,10 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ValueObjects\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\src\DocumentManagementBackend.Domain\DocumentManagementBackend.Domain.csproj" />
     </ItemGroup>
 

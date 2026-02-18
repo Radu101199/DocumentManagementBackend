@@ -1,5 +1,6 @@
 using DocumentManagementBackend.Domain.Enums;
 using DocumentManagementBackend.Domain.Exceptions;
+using DocumentManagementBackend.Domain.ValueObjects;
 
 namespace DocumentManagementBackend.Domain.Entities;
 
@@ -7,12 +8,14 @@ public class User : BaseAuditableEntity
 {
     // ✅ Private setters
     public Guid Id { get; private set; }
-    public string Email { get; private set; } = string.Empty;
+    public Email Email { get; private set; } = null!;
     public string FirstName { get; private set; } = string.Empty;
     public string LastName { get; private set; } = string.Empty;
     public string PasswordHash { get; private set; } = string.Empty;
-    public UserRole Role { get; private set; } = UserRole.User;
-    public bool IsActive { get; private set; } = true;
+    public UserStatus Status { get; private set; } = UserStatus.Active;
+    
+    private readonly List<UserRole> _roles = new();
+    public IReadOnlyCollection<UserRole> Roles => _roles.AsReadOnly();
     
     // Navigation property
     public ICollection<Document> Documents { get; private set; } = new List<Document>();
@@ -25,15 +28,12 @@ public class User : BaseAuditableEntity
 
     // ✅ Factory method
     public static User Create(
-        string email,
+        Email email,
         string firstName,
         string lastName,
         string passwordHash,
-        UserRole role = UserRole.User)
+        UserRole initialRole = UserRole.User)
     {
-        if (string.IsNullOrWhiteSpace(email))
-            throw new DomainException("Email is required");
-
         if (string.IsNullOrWhiteSpace(firstName))
             throw new DomainException("First name is required");
 
@@ -43,16 +43,19 @@ public class User : BaseAuditableEntity
         if (string.IsNullOrWhiteSpace(passwordHash))
             throw new DomainException("Password hash is required");
 
-        return new User
+        var user = new User
         {
             Id = Guid.NewGuid(),
-            Email = email.ToLowerInvariant(),
+            Email = email,
             FirstName = firstName,
             LastName = lastName,
             PasswordHash = passwordHash,
-            Role = role,
-            IsActive = true
+            Status = UserStatus.Active
         };
+
+        user._roles.Add(initialRole);
+
+        return user;
     }
 
     // ✅ Metode publice controlate
@@ -68,34 +71,71 @@ public class User : BaseAuditableEntity
         LastName = lastName;
     }
 
-    public void ChangeEmail(string newEmail)
+    public void ChangeEmail(Email newEmail)
     {
-        if (string.IsNullOrWhiteSpace(newEmail))
-            throw new DomainException("Email is required");
-
-        Email = newEmail.ToLowerInvariant();
+        Email = newEmail;
     }
 
     public void ChangePassword(string newPasswordHash)
     {
+        if (Status == UserStatus.Locked)
+            throw new UserLockedException(Id);
+
         if (string.IsNullOrWhiteSpace(newPasswordHash))
             throw new DomainException("Password hash is required");
 
         PasswordHash = newPasswordHash;
     }
 
-    public void PromoteToRole(UserRole newRole)
+    public void Lock(string reason)
     {
-        Role = newRole;
+        if (Status == UserStatus.Locked)
+            throw new DomainException($"User {Id} is already locked");
+
+        Status = UserStatus.Locked;
     }
 
-    public void Deactivate()
+    public void Unlock()
     {
-        IsActive = false;
+        if (Status != UserStatus.Locked)
+            throw new DomainException($"User {Id} is not locked");
+
+        Status = UserStatus.Active;
+    }
+
+    public void Suspend()
+    {
+        if (Status == UserStatus.Suspended)
+            throw new DomainException($"User {Id} is already suspended");
+
+        Status = UserStatus.Suspended;
     }
 
     public void Activate()
     {
-        IsActive = true;
+        Status = UserStatus.Active;
     }
+
+    public void AddRole(UserRole role)
+    {
+        if (_roles.Contains(role))
+            throw new DomainException($"User already has role {role}");
+
+        _roles.Add(role);
+    }
+
+    public void RemoveRole(UserRole role)
+    {
+        if (!_roles.Contains(role))
+            throw new DomainException($"User does not have role {role}");
+
+        if (_roles.Count == 1)
+            throw new DomainException("User must have at least one role");
+
+        _roles.Remove(role);
+    }
+
+    public bool HasRole(UserRole role) => _roles.Contains(role);
+
+    public bool CanLogin() => Status == UserStatus.Active;
 }

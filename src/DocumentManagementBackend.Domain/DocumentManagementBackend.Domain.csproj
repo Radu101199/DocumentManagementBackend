@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Invariants\" />
-      <Folder Include="ValueObjects\" />
     </ItemGroup>
 
 </Project>
