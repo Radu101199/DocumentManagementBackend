@@ -1,0 +1,6 @@
+2026-02-19 07:23:35.195 +02:00 [INF] Starting web application
+2026-02-19 07:23:35.497 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-02-19 07:23:35.529 +02:00 [INF] Test endpoint called
+2026-02-19 07:23:35.529 +02:00 [WRN] This is a warning
+2026-02-19 07:23:35.530 +02:00 [ERR] This is an error
+2026-02-19 07:23:35.590 +02:00 [INF] HTTP GET /api/test responded 200 in 107.7243 ms
