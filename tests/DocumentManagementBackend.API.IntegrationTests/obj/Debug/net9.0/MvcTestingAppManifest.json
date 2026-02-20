@@ -1,6 +1,6 @@
 {
-  "DocumentManagementBackend.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/paunradu\/Developer\/Programare\/SideProj\/DocumentManagementBackend\/DocumentManagementBackend\/src\/DocumentManagementBackend.API",
-  "DocumentManagementBackend.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/paunradu\/Developer\/Programare\/SideProj\/DocumentManagementBackend\/DocumentManagementBackend\/src\/DocumentManagementBackend.Application",
-  "DocumentManagementBackend.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/paunradu\/Developer\/Programare\/SideProj\/DocumentManagementBackend\/DocumentManagementBackend\/src\/DocumentManagementBackend.Domain",
-  "DocumentManagementBackend.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/paunradu\/Developer\/Programare\/SideProj\/DocumentManagementBackend\/DocumentManagementBackend\/src\/DocumentManagementBackend.Infrastructure"
+  "DocumentManagementBackend.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Raducu-PetrisorPaun\\source\\repos\\Radu101199\\DocumentManagementBackend\\src\\DocumentManagementBackend.API",
+  "DocumentManagementBackend.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Raducu-PetrisorPaun\\source\\repos\\Radu101199\\DocumentManagementBackend\\src\\DocumentManagementBackend.Application",
+  "DocumentManagementBackend.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Raducu-PetrisorPaun\\source\\repos\\Radu101199\\DocumentManagementBackend\\src\\DocumentManagementBackend.Domain",
+  "DocumentManagementBackend.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Raducu-PetrisorPaun\\source\\repos\\Radu101199\\DocumentManagementBackend\\src\\DocumentManagementBackend.Infrastructure"
 }
