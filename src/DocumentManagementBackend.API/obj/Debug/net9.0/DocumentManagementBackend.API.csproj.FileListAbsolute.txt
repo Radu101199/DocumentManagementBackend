@@ -163,9 +163,6 @@
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/obj/Debug/net9.0/DocumentManagementBackend.API.pdb
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/obj/Debug/net9.0/DocumentManagementBackend.API.genruntimeconfig.cache
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/obj/Debug/net9.0/ref/DocumentManagementBackend.API.dll
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\obj\Debug\net9.0\DocumentManagementBackend.API.dll
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\obj\Debug\net9.0\refint\DocumentManagementBackend.API.dll
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\obj\Debug\net9.0\DocumentManagementBackend.API.pdb
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\bin\Debug\net9.0\appsettings.Development.json
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\bin\Debug\net9.0\appsettings.json
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\bin\Debug\net9.0\DocumentManagementBackend.API.staticwebassets.endpoints.json
@@ -327,5 +324,8 @@ C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\s
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.DocumentManagementBackend.API.props
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\obj\Debug\net9.0\staticwebassets.pack.json
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\obj\Debug\net9.0\Document.7968537B.Up2Date
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\obj\Debug\net9.0\DocumentManagementBackend.API.dll
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\obj\Debug\net9.0\refint\DocumentManagementBackend.API.dll
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\obj\Debug\net9.0\DocumentManagementBackend.API.pdb
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\obj\Debug\net9.0\DocumentManagementBackend.API.genruntimeconfig.cache
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.API\obj\Debug\net9.0\ref\DocumentManagementBackend.API.dll

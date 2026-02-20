@@ -16,9 +16,6 @@
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/obj/Debug/net9.0/refint/DocumentManagementBackend.Infrastructure.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/obj/Debug/net9.0/DocumentManagementBackend.Infrastructure.pdb
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/obj/Debug/net9.0/ref/DocumentManagementBackend.Infrastructure.dll
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\obj\Debug\net9.0\DocumentManagementBackend.Infrastructure.dll
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\obj\Debug\net9.0\refint\DocumentManagementBackend.Infrastructure.dll
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\obj\Debug\net9.0\DocumentManagementBackend.Infrastructure.pdb
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\bin\Debug\net9.0\DocumentManagementBackend.Infrastructure.deps.json
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\bin\Debug\net9.0\DocumentManagementBackend.Infrastructure.dll
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\bin\Debug\net9.0\DocumentManagementBackend.Infrastructure.pdb
@@ -33,4 +30,7 @@ C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\s
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\obj\Debug\net9.0\DocumentManagementBackend.Infrastructure.csproj.CoreCompileInputs.cache
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\obj\Debug\net9.0\DocumentManagementBackend.Infrastructure.sourcelink.json
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\obj\Debug\net9.0\Document.4595F950.Up2Date
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\obj\Debug\net9.0\DocumentManagementBackend.Infrastructure.dll
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\obj\Debug\net9.0\refint\DocumentManagementBackend.Infrastructure.dll
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\obj\Debug\net9.0\DocumentManagementBackend.Infrastructure.pdb
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\src\DocumentManagementBackend.Infrastructure\obj\Debug\net9.0\ref\DocumentManagementBackend.Infrastructure.dll

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DocumentManagementBackend.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d029ee464a1dc11cf87d9d84e5e6cf0bec16cd4f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8262d95823b348b3399408a8659511f6717e7d1c")]
 [assembly: System.Reflection.AssemblyProductAttribute("DocumentManagementBackend.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DocumentManagementBackend.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

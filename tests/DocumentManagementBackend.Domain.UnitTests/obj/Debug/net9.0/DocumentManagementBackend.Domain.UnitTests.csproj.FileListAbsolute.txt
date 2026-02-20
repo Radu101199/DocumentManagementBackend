@@ -104,13 +104,13 @@
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\.msCoverageSourceRootsMapping_DocumentManagementBackend.Domain.UnitTests
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\CoverletSourceRootsMapping_DocumentManagementBackend.Domain.UnitTests
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\testhost.dll
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\testhost.exe
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\NUnit3.TestAdapter.dll
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\NUnit3.TestAdapter.pdb
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\nunit.engine.dll
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\nunit.engine.api.dll
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\nunit.engine.core.dll
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\testcentric.engine.metadata.dll
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\testhost.exe
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\DocumentManagementBackend.Domain.UnitTests.deps.json
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\DocumentManagementBackend.Domain.UnitTests.runtimeconfig.json
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Domain.UnitTests\bin\Debug\net9.0\DocumentManagementBackend.Domain.UnitTests.dll

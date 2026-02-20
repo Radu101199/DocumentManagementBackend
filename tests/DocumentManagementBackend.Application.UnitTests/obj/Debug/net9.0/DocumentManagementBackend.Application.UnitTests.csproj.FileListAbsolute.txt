@@ -133,12 +133,6 @@
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Application.UnitTests/obj/Debug/net9.0/ref/DocumentManagementBackend.Application.UnitTests.dll
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\bin\Debug\net9.0\.msCoverageSourceRootsMapping_DocumentManagementBackend.Application.UnitTests
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\bin\Debug\net9.0\CoverletSourceRootsMapping_DocumentManagementBackend.Application.UnitTests
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.csproj.AssemblyReference.cache
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.AssemblyInfoInputs.cache
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.AssemblyInfo.cs
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.csproj.CoreCompileInputs.cache
-C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.sourcelink.json
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\bin\Debug\net9.0\testhost.dll
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\bin\Debug\net9.0\testhost.exe
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\bin\Debug\net9.0\NUnit3.TestAdapter.dll
@@ -259,6 +253,12 @@ C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\t
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\bin\Debug\net9.0\DocumentManagementBackend.Domain.dll
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\bin\Debug\net9.0\DocumentManagementBackend.Application.pdb
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\bin\Debug\net9.0\DocumentManagementBackend.Domain.pdb
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.csproj.AssemblyReference.cache
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.AssemblyInfoInputs.cache
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.AssemblyInfo.cs
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.sourcelink.json
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\Document.6357C3D1.Up2Date
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\DocumentManagementBackend.Application.UnitTests.dll
 C:\Users\Raducu-PetrisorPaun\source\repos\Radu101199\DocumentManagementBackend\tests\DocumentManagementBackend.Application.UnitTests\obj\Debug\net9.0\refint\DocumentManagementBackend.Application.UnitTests.dll
