@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using DocumentManagementBackend.Domain.Enums;
 using DocumentManagementBackend.Domain.Events;
 using DocumentManagementBackend.Domain.Exceptions;
@@ -29,6 +30,7 @@ public class Document : BaseAuditableEntity
     public User Owner { get; private set; } = null!;
 
     // Domain Events (read-only collection)
+    [NotMapped]
     public IReadOnlyCollection<BaseDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     // Business rule: Approval window is 7 days

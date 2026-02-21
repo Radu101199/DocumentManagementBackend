@@ -4355,37 +4355,36 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Raducu-PetrisorPaun\\.nuget\\packages\\": {}
+    "/Users/paunradu/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Raducu-PetrisorPaun\\source\\repos\\Radu101199\\DocumentManagementBackend\\src\\DocumentManagementBackend.API\\DocumentManagementBackend.API.csproj",
+      "projectUniqueName": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/DocumentManagementBackend.API.csproj",
       "projectName": "DocumentManagementBackend.API",
-      "projectPath": "C:\\Users\\Raducu-PetrisorPaun\\source\\repos\\Radu101199\\DocumentManagementBackend\\src\\DocumentManagementBackend.API\\DocumentManagementBackend.API.csproj",
-      "packagesPath": "C:\\Users\\Raducu-PetrisorPaun\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Raducu-PetrisorPaun\\source\\repos\\Radu101199\\DocumentManagementBackend\\src\\DocumentManagementBackend.API\\obj\\",
+      "projectPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/DocumentManagementBackend.API.csproj",
+      "packagesPath": "/Users/paunradu/.nuget/packages/",
+      "outputPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Raducu-PetrisorPaun\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/paunradu/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\Raducu-PetrisorPaun\\source\\repos\\Radu101199\\DocumentManagementBackend\\src\\DocumentManagementBackend.Application\\DocumentManagementBackend.Application.csproj": {
-              "projectPath": "C:\\Users\\Raducu-PetrisorPaun\\source\\repos\\Radu101199\\DocumentManagementBackend\\src\\DocumentManagementBackend.Application\\DocumentManagementBackend.Application.csproj"
+            "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Application/DocumentManagementBackend.Application.csproj": {
+              "projectPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Application/DocumentManagementBackend.Application.csproj"
             },
-            "C:\\Users\\Raducu-PetrisorPaun\\source\\repos\\Radu101199\\DocumentManagementBackend\\src\\DocumentManagementBackend.Infrastructure\\DocumentManagementBackend.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\Raducu-PetrisorPaun\\source\\repos\\Radu101199\\DocumentManagementBackend\\src\\DocumentManagementBackend.Infrastructure\\DocumentManagementBackend.Infrastructure.csproj"
+            "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/DocumentManagementBackend.Infrastructure.csproj": {
+              "projectPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/DocumentManagementBackend.Infrastructure.csproj"
             }
           }
         }
@@ -4398,9 +4397,9 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
+        "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -4452,7 +4451,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.311/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

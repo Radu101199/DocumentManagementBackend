@@ -1,19 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "uaDlCIuh3jk=",
+  "dgSpecHash": "1jDcTgwwCaM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Raducu-PetrisorPaun\\source\\repos\\Radu101199\\DocumentManagementBackend\\tests\\DocumentManagementBackend.Domain.UnitTests\\DocumentManagementBackend.Domain.UnitTests.csproj",
+  "projectFilePath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Domain.UnitTests/DocumentManagementBackend.Domain.UnitTests.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Raducu-PetrisorPaun\\.nuget\\packages\\coverlet.collector\\6.0.2\\coverlet.collector.6.0.2.nupkg.sha512",
-    "C:\\Users\\Raducu-PetrisorPaun\\.nuget\\packages\\microsoft.codecoverage\\17.12.0\\microsoft.codecoverage.17.12.0.nupkg.sha512",
-    "C:\\Users\\Raducu-PetrisorPaun\\.nuget\\packages\\microsoft.net.test.sdk\\17.12.0\\microsoft.net.test.sdk.17.12.0.nupkg.sha512",
-    "C:\\Users\\Raducu-PetrisorPaun\\.nuget\\packages\\microsoft.testplatform.objectmodel\\17.12.0\\microsoft.testplatform.objectmodel.17.12.0.nupkg.sha512",
-    "C:\\Users\\Raducu-PetrisorPaun\\.nuget\\packages\\microsoft.testplatform.testhost\\17.12.0\\microsoft.testplatform.testhost.17.12.0.nupkg.sha512",
-    "C:\\Users\\Raducu-PetrisorPaun\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
-    "C:\\Users\\Raducu-PetrisorPaun\\.nuget\\packages\\nunit\\4.2.2\\nunit.4.2.2.nupkg.sha512",
-    "C:\\Users\\Raducu-PetrisorPaun\\.nuget\\packages\\nunit.analyzers\\4.4.0\\nunit.analyzers.4.4.0.nupkg.sha512",
-    "C:\\Users\\Raducu-PetrisorPaun\\.nuget\\packages\\nunit3testadapter\\4.6.0\\nunit3testadapter.4.6.0.nupkg.sha512",
-    "C:\\Users\\Raducu-PetrisorPaun\\.nuget\\packages\\system.reflection.metadata\\1.6.0\\system.reflection.metadata.1.6.0.nupkg.sha512"
+    "/Users/paunradu/.nuget/packages/coverlet.collector/6.0.2/coverlet.collector.6.0.2.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.codecoverage/17.12.0/microsoft.codecoverage.17.12.0.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.net.test.sdk/17.12.0/microsoft.net.test.sdk.17.12.0.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.testplatform.objectmodel/17.12.0/microsoft.testplatform.objectmodel.17.12.0.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.testplatform.testhost/17.12.0/microsoft.testplatform.testhost.17.12.0.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/nunit/4.2.2/nunit.4.2.2.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/nunit.analyzers/4.4.0/nunit.analyzers.4.4.0.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/nunit3testadapter/4.6.0/nunit3testadapter.4.6.0.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/system.reflection.metadata/1.6.0/system.reflection.metadata.1.6.0.nupkg.sha512"
   ],
   "logs": []
 }

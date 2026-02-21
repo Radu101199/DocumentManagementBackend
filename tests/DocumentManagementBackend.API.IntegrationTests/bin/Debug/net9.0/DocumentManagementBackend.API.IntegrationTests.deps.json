@@ -1786,7 +1786,7 @@
         },
         "runtime": {
           "DocumentManagementBackend.API.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -1805,7 +1805,7 @@
         },
         "runtime": {
           "DocumentManagementBackend.Application.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -1816,7 +1816,7 @@
       "DocumentManagementBackend.Domain/1.0.0": {
         "runtime": {
           "DocumentManagementBackend.Domain.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -1833,7 +1833,7 @@
         },
         "runtime": {
           "DocumentManagementBackend.Infrastructure.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },

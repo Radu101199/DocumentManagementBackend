@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
@@ -9,6 +9,18 @@
     <ItemGroup>
       <Folder Include="Persistence\" />
       <Folder Include="Services\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\DocumentManagementBackend.Domain\DocumentManagementBackend.Domain.csproj" />
+      <ProjectReference Include="..\..\src\DocumentManagementBackend.Infrastructure\DocumentManagementBackend.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+      <PackageReference Include="NUnit" Version="4.5.0" />
+      <PackageReference Include="NUnit3TestAdapter" Version="6.1.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.0" />
     </ItemGroup>
 
 </Project>
