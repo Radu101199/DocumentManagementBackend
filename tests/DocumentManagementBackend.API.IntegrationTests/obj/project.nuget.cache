@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "h8DviQQ/Rd4=",
+  "dgSpecHash": "kgRt2+e9gRE=",
   "success": true,
   "projectFilePath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.API.IntegrationTests/DocumentManagementBackend.API.IntegrationTests.csproj",
   "expectedPackageFiles": [
+    "/Users/paunradu/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/fluentvalidation/12.1.1/fluentvalidation.12.1.1.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/fluentvalidation.dependencyinjectionextensions/12.1.1/fluentvalidation.dependencyinjectionextensions.12.1.1.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/mediatr/13.1.0/mediatr.13.1.0.nupkg.sha512",
@@ -13,6 +15,7 @@
     "/Users/paunradu/.nuget/packages/microsoft.aspnetcore.openapi/9.0.12/microsoft.aspnetcore.openapi.9.0.12.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/microsoft.aspnetcore.testhost/9.0.0/microsoft.aspnetcore.testhost.9.0.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/microsoft.codecoverage/18.0.1/microsoft.codecoverage.18.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/microsoft.entityframeworkcore/9.0.0/microsoft.entityframeworkcore.9.0.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.0/microsoft.entityframeworkcore.abstractions.9.0.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/microsoft.entityframeworkcore.analyzers/9.0.0/microsoft.entityframeworkcore.analyzers.9.0.0.nupkg.sha512",

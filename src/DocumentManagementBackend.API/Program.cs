@@ -1,5 +1,6 @@
-using DocumentManagementBackend.Infrastructure;
 using Serilog;
+using DocumentManagementBackend.Application;
+using DocumentManagementBackend.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Adaugă Infrastructure layer (DbContext included)
+// Add Application layer (MediatR + FluentValidation + Behaviors)
+builder.Services.AddApplication();
+
+// Add Infrastructure layer (DbContext + Repositories)
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
@@ -25,6 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Add Serilog request logging
 app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
@@ -45,4 +50,5 @@ finally
     Log.CloseAndFlush();
 }
 
+// Make Program class accessible for integration tests
 public partial class Program { }
