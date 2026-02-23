@@ -1,6 +1,7 @@
 using Serilog;
 using DocumentManagementBackend.Application;
 using DocumentManagementBackend.Infrastructure;
+using DocumentManagementBackend.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Add exception handling middleware
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Add Serilog request logging
 app.UseSerilogRequestLogging();
