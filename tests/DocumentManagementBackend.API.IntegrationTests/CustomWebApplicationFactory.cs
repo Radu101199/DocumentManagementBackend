@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using DocumentManagementBackend.Infrastructure.Persistence;
+using DocumentManagementBackend.Application.Common.Interfaces;
 
 namespace DocumentManagementBackend.API.IntegrationTests;
 
@@ -12,32 +14,30 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
         builder.ConfigureServices(services =>
         {
-            // Remove ALL DbContext registrations
+            // Remove existing DbContext registration
+            var descriptor = services.SingleOrDefault(
+                d => d.ServiceType == typeof(DbContextOptions<AppDbContext>));
+
+            if (descriptor != null)
+                services.Remove(descriptor);
+
+            // Remove the DbConnection if registered
             var dbContextDescriptor = services.SingleOrDefault(
-                d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-            
+                d => d.ServiceType == typeof(AppDbContext));
+
             if (dbContextDescriptor != null)
                 services.Remove(dbContextDescriptor);
 
-            var dbContextDescriptor2 = services.SingleOrDefault(
-                d => d.ServiceType == typeof(ApplicationDbContext));
-            
-            if (dbContextDescriptor2 != null)
-                services.Remove(dbContextDescriptor2);
-
-            // Add InMemory database for testing
-            services.AddDbContext<ApplicationDbContext>(options =>
+            // Add InMemory provider
+            services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseInMemoryDatabase($"TestDatabase_{Guid.NewGuid()}");
+                options.UseInMemoryDatabase("TestDb");
             });
 
-            // Build service provider and create database
+            // Build provider and ensure database created
             var sp = services.BuildServiceProvider();
             using var scope = sp.CreateScope();
-            var scopedServices = scope.ServiceProvider;
-            var db = scopedServices.GetRequiredService<ApplicationDbContext>();
-
-            // Ensure database is created
+            var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
             db.Database.EnsureCreated();
         });
     }

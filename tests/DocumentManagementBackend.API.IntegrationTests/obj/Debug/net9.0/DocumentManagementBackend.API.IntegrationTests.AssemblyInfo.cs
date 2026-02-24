@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DocumentManagementBackend.API.IntegrationTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+669b039f50d2d46be7c03c616822815aea1b8e64")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a4ded2970e6ecf89053f88165718efa2f6b18c0")]
 [assembly: System.Reflection.AssemblyProductAttribute("DocumentManagementBackend.API.IntegrationTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DocumentManagementBackend.API.IntegrationTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

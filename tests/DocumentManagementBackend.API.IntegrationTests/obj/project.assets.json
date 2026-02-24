@@ -2077,8 +2077,10 @@
         "dependencies": {
           "DocumentManagementBackend.Application": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.0",
+          "Microsoft.EntityFrameworkCore.InMemory": "9.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.0",
+          "Microsoft.Extensions.Hosting.Abstractions": "9.0.0"
         },
         "compile": {
           "bin/placeholder/DocumentManagementBackend.Infrastructure.dll": {}
