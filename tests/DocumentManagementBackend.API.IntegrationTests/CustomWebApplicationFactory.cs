@@ -2,9 +2,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using DocumentManagementBackend.Infrastructure.Persistence;
-using DocumentManagementBackend.Application.Common.Interfaces;
+using Microsoft.Data.Sqlite;
 
 namespace DocumentManagementBackend.API.IntegrationTests;
 
@@ -14,31 +13,28 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
         builder.ConfigureServices(services =>
         {
-            // Remove existing DbContext registration
             var descriptor = services.SingleOrDefault(
-                d => d.ServiceType == typeof(DbContextOptions<AppDbContext>));
+                d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
 
             if (descriptor != null)
                 services.Remove(descriptor);
 
-            // Remove the DbConnection if registered
-            var dbContextDescriptor = services.SingleOrDefault(
-                d => d.ServiceType == typeof(AppDbContext));
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open(); // VERY IMPORTANT
 
-            if (dbContextDescriptor != null)
-                services.Remove(dbContextDescriptor);
-
-            // Add InMemory provider
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseInMemoryDatabase("TestDb");
+                options.UseSqlite(connection);
             });
 
-            // Build provider and ensure database created
+            // Ensure DB is created
             var sp = services.BuildServiceProvider();
             using var scope = sp.CreateScope();
-            var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             db.Database.EnsureCreated();
         });
+
+        // Set environment to Testing
+        builder.UseEnvironment("Testing");
     }
 }

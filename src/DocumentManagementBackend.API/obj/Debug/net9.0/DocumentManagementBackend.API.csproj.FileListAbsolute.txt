@@ -172,6 +172,8 @@ C:/Users/Raducu-PetrisorPaun/source/repos/Radu101199/DocumentManagementBackend/s
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/DocumentManagementBackend.API.runtimeconfig.json
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/DocumentManagementBackend.API.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/DocumentManagementBackend.API.pdb
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/AutoMapper.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/FluentValidation.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/FluentValidation.DependencyInjectionExtensions.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Humanizer.dll
@@ -189,6 +191,7 @@ C:/Users/Raducu-PetrisorPaun/source/repos/Radu101199/DocumentManagementBackend/s
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.InMemory.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Relational.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Microsoft.Extensions.Configuration.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Microsoft.Extensions.Configuration.Abstractions.dll
@@ -329,5 +332,3 @@ C:/Users/Raducu-PetrisorPaun/source/repos/Radu101199/DocumentManagementBackend/s
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/obj/Debug/net9.0/DocumentManagementBackend.API.pdb
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/obj/Debug/net9.0/DocumentManagementBackend.API.genruntimeconfig.cache
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/obj/Debug/net9.0/ref/DocumentManagementBackend.API.dll
-/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/AutoMapper.dll
-/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll

@@ -12,17 +12,33 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(
         this IServiceCollection services,
-        IConfiguration configuration)
+        IConfiguration configuration,
+        string? environmentName = null)
     {
-        // DbContext
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(
-                configuration.GetConnectionString("DefaultConnection"),
-                npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(
-                    "__EFMigrationsHistory", 
-                    "DocumentManagement")
-            )
-        );
+        // Use InMemory database for testing
+        if (environmentName == "Testing")
+        {
+            // IMPORTANT: Use a fixed database name for all tests
+            services.AddDbContext<ApplicationDbContext>(
+                options =>
+                {
+                    options.UseInMemoryDatabase("TestDatabase");
+                    options.EnableSensitiveDataLogging();
+                },
+                ServiceLifetime.Scoped); // Scoped per request
+        }
+        else
+        {
+            // PostgreSQL for production
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(
+                    configuration.GetConnectionString("DefaultConnection"),
+                    npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(
+                        "__EFMigrationsHistory", 
+                        "DocumentManagement")
+                )
+            );
+        }
         
         // IApplicationDbContext
         services.AddScoped<IApplicationDbContext>(provider =>

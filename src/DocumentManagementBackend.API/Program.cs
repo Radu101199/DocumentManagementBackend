@@ -15,11 +15,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add Application layer (MediatR + FluentValidation + Behaviors)
+// Add Application layer
 builder.Services.AddApplication();
 
-// Add Infrastructure layer (DbContext + Repositories)
-builder.Services.AddInfrastructure(builder.Configuration);
+// Add Infrastructure layer (pass environment name as string)
+builder.Services.AddInfrastructure(builder.Configuration, builder.Environment.EnvironmentName);
 
 var app = builder.Build();
 
