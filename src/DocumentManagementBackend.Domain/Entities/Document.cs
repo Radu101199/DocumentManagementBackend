@@ -145,6 +145,12 @@ public class Document : BaseAuditableEntity
             throw new DomainException("Rejection reason is required");
         }
 
+        // Must have an active approval request
+        if (ApprovalRequestedAt == null || ApprovalExpiresAt == null)
+        {
+            throw new DocumentInvalidStateException(Id, Status.ToString(), "reject without requesting approval first");
+        }
+
         // Can only reject from Draft status during approval
         if (Status != DocumentStatus.Draft)
         {

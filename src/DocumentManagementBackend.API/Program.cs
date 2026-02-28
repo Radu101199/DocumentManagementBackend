@@ -15,11 +15,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Get current environment
+var env = builder.Environment.EnvironmentName;
+
 // Add Application layer
 builder.Services.AddApplication();
 
-// Add Infrastructure layer (pass environment name as string)
-builder.Services.AddInfrastructure(builder.Configuration, builder.Environment.EnvironmentName);
+// Add Infrastructure layer
+// Pass environment so Infrastructure can skip DB registration in tests
+builder.Services.AddInfrastructure(builder.Configuration, env);
 
 var app = builder.Build();
 

@@ -5,23 +5,34 @@ using NUnit.Framework;
 
 namespace DocumentManagementBackend.API.IntegrationTests.Workflows;
 
+[TestFixture]
 public class DocumentApprovalWorkflowTests
 {
-    private CustomWebApplicationFactory _factory;
-    private HttpClient _client;
+    private static CustomWebApplicationFactory? _sharedFactory;
+    private HttpClient _client = null!;
+
+    [OneTimeSetUp]
+    public void OneTimeSetup()
+    {
+        _sharedFactory = new CustomWebApplicationFactory();
+    }
+
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        _sharedFactory?.Dispose();
+    }
 
     [SetUp]
     public void Setup()
     {
-        _factory = new CustomWebApplicationFactory();
-        _client = _factory.CreateClient();
+        _client = _sharedFactory!.CreateClient();
     }
 
     [TearDown]
     public void TearDown()
     {
         _client?.Dispose();
-        _factory?.Dispose();
     }
 
     [Test]
@@ -29,25 +40,29 @@ public class DocumentApprovalWorkflowTests
     {
         // 1. Create Document
         var createCommand = new CreateDocumentCommand(
-            Title: "Project Proposal",
+            Title: "Project Proposal Workflow",
             Description: "Q1 2026 Project Proposal",
             FileName: "proposal.pdf",
             FilePath: "/files/proposal.pdf",
             ContentType: "application/pdf",
             FileSizeBytes: 2048,
-            OwnerId: Guid.NewGuid(),
-            CreatorId: Guid.NewGuid());
+            OwnerId: _sharedFactory!.TestUserId,
+            CreatorId: _sharedFactory!.TestUserId);
 
         var createResponse = await _client.PostAsJsonAsync("/api/documents", createCommand);
-        Assert.That(createResponse.StatusCode, Is.EqualTo(HttpStatusCode.Created));
-        
+        if (createResponse.StatusCode != HttpStatusCode.Created)
+        {
+            var body = await createResponse.Content.ReadAsStringAsync();
+            Assert.Fail($"Create failed ({createResponse.StatusCode}): {body}");
+        }
+
         var documentId = await createResponse.Content.ReadFromJsonAsync<Guid>();
         Assert.That(documentId, Is.Not.EqualTo(Guid.Empty));
 
         // 2. Mark as Reviewed
         var reviewPayload = new
         {
-            ReviewerId = Guid.NewGuid(),
+            ReviewerId = _sharedFactory!.TestUserId,
             Notes = "Initial review completed"
         };
 
@@ -57,43 +72,46 @@ public class DocumentApprovalWorkflowTests
         // 3. Try to Approve (should fail - needs RequestApproval first)
         var approvePayload = new
         {
-            ApproverId = Guid.NewGuid(),
+            ApproverId = _sharedFactory!.TestUserId,
             Notes = "Approved"
         };
 
         var approveResponse = await _client.PostAsJsonAsync($"/api/documents/{documentId}/approve", approvePayload);
         Assert.That(approveResponse.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
-
-        // This demonstrates that domain invariants are enforced end-to-end
     }
 
     [Test]
-    public async Task Reject_Then_Cannot_Approve_Without_New_Approval_Request()
+    public async Task Reject_Should_Fail_Without_Approval_Request()
     {
         // 1. Create Document
         var createCommand = new CreateDocumentCommand(
-            Title: "Draft Document",
+            Title: "Draft Document Reject Test",
             Description: "Draft",
             FileName: "draft.pdf",
             FilePath: "/files/draft.pdf",
             ContentType: "application/pdf",
             FileSizeBytes: 1024,
-            OwnerId: Guid.NewGuid(),
-            CreatorId: Guid.NewGuid());
+            OwnerId: _sharedFactory!.TestUserId,
+            CreatorId: _sharedFactory!.TestUserId);
 
         var createResponse = await _client.PostAsJsonAsync("/api/documents", createCommand);
+        if (createResponse.StatusCode != HttpStatusCode.Created)
+        {
+            var body = await createResponse.Content.ReadAsStringAsync();
+            Assert.Fail($"Create failed ({createResponse.StatusCode}): {body}");
+        }
+
         var documentId = await createResponse.Content.ReadFromJsonAsync<Guid>();
 
-        // 2. Reject Document
+        // 2. Try to Reject Document (should fail - needs approval request first)
         var rejectPayload = new
         {
-            RejectorId = Guid.NewGuid(),
+            RejectorId = _sharedFactory!.TestUserId,
             Reason = "Missing signatures"
         };
 
         var rejectResponse = await _client.PostAsJsonAsync($"/api/documents/{documentId}/reject", rejectPayload);
-        
-        // Should fail because document needs approval request first
+
         Assert.That(rejectResponse.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
     }
 }
