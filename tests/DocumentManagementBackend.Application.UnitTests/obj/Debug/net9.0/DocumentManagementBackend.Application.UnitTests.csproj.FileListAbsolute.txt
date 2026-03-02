@@ -267,3 +267,4 @@ C:/Users/Raducu-PetrisorPaun/source/repos/Radu101199/DocumentManagementBackend/t
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Application.UnitTests/obj/Debug/net9.0/DocumentManagementBackend.Application.UnitTests.pdb
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Application.UnitTests/obj/Debug/net9.0/DocumentManagementBackend.Application.UnitTests.genruntimeconfig.cache
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Application.UnitTests/obj/Debug/net9.0/ref/DocumentManagementBackend.Application.UnitTests.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Application.UnitTests/bin/Debug/net9.0/BCrypt.Net-Next.dll

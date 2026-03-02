@@ -1,4 +1,6 @@
+using DocumentManagementBackend.Application.Common.Interfaces;
 using DocumentManagementBackend.Domain.Interfaces;
+using DocumentManagementBackend.Infrastructure.Auth;
 using DocumentManagementBackend.Infrastructure.Persistence;
 using DocumentManagementBackend.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -19,8 +21,11 @@ public static class DependencyInjection
         }
 
         // Always register repositories
+        // Always register repositories
         services.AddScoped<IDocumentRepository, DocumentRepository>();
-
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IJwtTokenService, JwtTokenService>();
+        
         return services;
     }
 }

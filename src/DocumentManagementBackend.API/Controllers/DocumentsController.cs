@@ -5,6 +5,7 @@ using DocumentManagementBackend.Application.Features.Documents.Commands.ApproveD
 using DocumentManagementBackend.Application.Features.Documents.Commands.RejectDocument;
 using DocumentManagementBackend.Application.Features.Documents.Commands.CancelApproval;
 using DocumentManagementBackend.Application.Features.Documents.Commands.MarkReviewed;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DocumentManagementBackend.API.Controllers;
 
@@ -37,6 +38,7 @@ public class DocumentsController : ControllerBase
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [Authorize]
     public async Task<IActionResult> GetById(Guid id)
     {
         // TODO: Implement GetDocumentQuery
@@ -50,6 +52,7 @@ public class DocumentsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize]
     public async Task<IActionResult> MarkReviewed(Guid id, [FromBody] MarkReviewedRequest request)
     {
         var command = new MarkReviewedCommand(id, request.ReviewerId, request.Notes);
@@ -64,6 +67,7 @@ public class DocumentsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize]
     public async Task<IActionResult> Approve(Guid id, [FromBody] ApproveRequest request)
     {
         var command = new ApproveDocumentCommand(id, request.ApproverId, request.Notes);
@@ -78,6 +82,7 @@ public class DocumentsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize]
     public async Task<IActionResult> Reject(Guid id, [FromBody] RejectRequest request)
     {
         var command = new RejectDocumentCommand(id, request.RejectorId, request.Reason);
@@ -92,6 +97,7 @@ public class DocumentsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize]
     public async Task<IActionResult> CancelApproval(Guid id, [FromBody] CancelApprovalRequest request)
     {
         var command = new CancelApprovalCommand(id, request.CancelledById, request.Reason);

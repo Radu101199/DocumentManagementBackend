@@ -43,17 +43,22 @@ public class ExceptionHandlingMiddleware
             NotFoundException notFoundEx => (
                 HttpStatusCode.NotFound,
                 notFoundEx.Message,
-                null
+                (object?)null
+            ),
+            UnauthorizedException unauthorizedEx => (
+                HttpStatusCode.Unauthorized,
+                unauthorizedEx.Message,
+                (object?)null
             ),
             DomainException domainEx => (
                 HttpStatusCode.BadRequest,
                 domainEx.Message,
-                null
+                (object?)null
             ),
             _ => (
                 HttpStatusCode.InternalServerError,
                 "An error occurred while processing your request",
-                null
+                (object?)null
             )
         };
 
