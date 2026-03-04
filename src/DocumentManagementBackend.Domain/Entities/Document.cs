@@ -144,7 +144,12 @@ public class Document : BaseAuditableEntity
         {
             throw new DomainException("Rejection reason is required");
         }
+        
+        // ✅ Verifică status PRIMUL — Archived nu poate face nimic
+        if (Status == DocumentStatus.Archived)
+            throw new DocumentInvalidStateException(Id, Status.ToString(), "reject");
 
+        
         // Must have an active approval request
         if (ApprovalRequestedAt == null || ApprovalExpiresAt == null)
         {

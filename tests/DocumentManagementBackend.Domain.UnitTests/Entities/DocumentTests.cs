@@ -310,9 +310,10 @@ public class DocumentTests
             // Arrange
             var document = DocumentBuilder.Create().BuildArchived();
 
-            // Act & Assert
-            Assert.Throws<InvalidStatusTransitionException>(() =>
-                document.Reject(Guid.NewGuid(), "Some reason"));
+            var ex = Assert.Throws<DocumentInvalidStateException>(
+                () => document.Reject(Guid.NewGuid(), "Some reason"));
+
+            Assert.That(ex.Message, Does.Contain("Archived"));
         }
     }
 

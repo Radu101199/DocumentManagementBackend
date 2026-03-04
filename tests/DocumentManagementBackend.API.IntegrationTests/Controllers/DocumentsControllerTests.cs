@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
+using DocumentManagementBackend.API.IntegrationTests.Helpers;
 using DocumentManagementBackend.Application.Features.Documents.Commands.CreateDocument;
 using NUnit.Framework;
 
@@ -10,6 +11,8 @@ public class DocumentsControllerTests
 {
     private static CustomWebApplicationFactory? _sharedFactory;
     private HttpClient _client = null!;
+    private HttpClient _adminClient = null!;
+
 
     [OneTimeSetUp]
     public void OneTimeSetup()
@@ -24,17 +27,46 @@ public class DocumentsControllerTests
     }
 
     [SetUp]
-    public void Setup()
+    public async Task Setup()
     {
         _client = _sharedFactory!.CreateClient();
+        var userToken = await AuthHelper.GetTokenAsync(_client, "user@test.com", "password123");
+        _client.AddAuthHeader(userToken);
+
+        _adminClient = _sharedFactory!.CreateClient();
+        var adminToken = await AuthHelper.GetTokenAsync(_adminClient, "admin@test.com", "password123");
+        _adminClient.AddAuthHeader(adminToken);
     }
 
     [TearDown]
     public void TearDown()
     {
         _client?.Dispose();
+        _adminClient?.Dispose();
     }
+    
+    [Test]
+    public async Task CreateDocument_Should_Return_Created_When_Authenticated()
+    {
+        
+        var command = new CreateDocumentCommand(
+            Title: "Test Document",
+            Description: "Test Description",
+            FileName: "test.pdf",
+            FilePath: "/files/test.pdf",
+            ContentType: "application/pdf",
+            FileSizeBytes: 1024,
+            OwnerId: _sharedFactory!.TestUserId,
+            CreatorId: _sharedFactory!.TestUserId);
 
+
+        // Act
+        var response = await _client.PostAsJsonAsync("/api/documents", command);
+
+        // Assert
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
+    }
+    
     [Test]
     public async Task CreateDocument_Should_Return_Created_With_DocumentId()
     {
@@ -78,6 +110,7 @@ public class DocumentsControllerTests
     [Test]
     public async Task ApproveDocument_Should_Return_BadRequest_When_Not_Requested()
     {
+        // Creează document cu user normal
         var createCommand = new CreateDocumentCommand(
             Title: "Test Document Approve",
             Description: "Test Description",
@@ -97,13 +130,9 @@ public class DocumentsControllerTests
 
         var documentId = await createResponse.Content.ReadFromJsonAsync<Guid>();
 
-        var approvePayload = new
-        {
-            ApproverId = _sharedFactory!.TestUserId,
-            Notes = "Looks good!"
-        };
-
-        var response = await _client.PostAsJsonAsync($"/api/documents/{documentId}/approve", approvePayload);
+        // ✅ Aprobă cu Admin
+        var approvePayload = new { ApproverId = _sharedFactory!.TestAdminId, Notes = "Looks good!" };
+        var response = await _adminClient.PostAsJsonAsync($"/api/documents/{documentId}/approve", approvePayload);
 
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
     }
@@ -111,14 +140,10 @@ public class DocumentsControllerTests
     [Test]
     public async Task ApproveDocument_Should_Return_NotFound_When_Document_DoesNotExist()
     {
-        var nonExistentId = Guid.NewGuid();
-        var approvePayload = new
-        {
-            ApproverId = _sharedFactory!.TestUserId,
-            Notes = "Looks good!"
-        };
-
-        var response = await _client.PostAsJsonAsync($"/api/documents/{nonExistentId}/approve", approvePayload);
+        // ✅ Admin încearcă să aprobă document inexistent
+        var approvePayload = new { ApproverId = _sharedFactory!.TestAdminId, Notes = "Looks good!" };
+        var response = await _adminClient.PostAsJsonAsync(
+            $"/api/documents/{Guid.NewGuid()}/approve", approvePayload);
 
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
     }
@@ -145,13 +170,9 @@ public class DocumentsControllerTests
 
         var documentId = await createResponse.Content.ReadFromJsonAsync<Guid>();
 
-        var rejectPayload = new
-        {
-            RejectorId = _sharedFactory!.TestUserId,
-            Reason = ""
-        };
-
-        var response = await _client.PostAsJsonAsync($"/api/documents/{documentId}/reject", rejectPayload);
+        // ✅ Respinge cu Admin, dar fără motiv
+        var rejectPayload = new { RejectorId = _sharedFactory!.TestAdminId, Reason = "" };
+        var response = await _adminClient.PostAsJsonAsync($"/api/documents/{documentId}/reject", rejectPayload);
 
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
     }

@@ -25,29 +25,13 @@ var env = builder.Environment.EnvironmentName;
 builder.Services.AddApplication();
 
 // Add Infrastructure layer
-// Pass environment so Infrastructure can skip DB registration in tests
 builder.Services.AddInfrastructure(builder.Configuration, env);
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-// Add exception handling middleware
-app.UseMiddleware<ExceptionHandlingMiddleware>();
-
-// Add Serilog request logging
-app.UseSerilogRequestLogging();
-
-app.UseHttpsRedirection();
-
-
-// Add JWT Authentication
+// ✅ JWT Authentication — ÎNAINTE de builder.Build()
 var jwtSecret = builder.Configuration["Jwt:Secret"]!;
+var jwtIssuer = builder.Configuration["Jwt:Issuer"]!;
+var jwtAudience = builder.Configuration["Jwt:Audience"]!;
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -57,8 +41,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
+            ValidIssuer = jwtIssuer,
+            ValidAudience = jwtAudience,
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(jwtSecret))
         };
@@ -66,9 +50,24 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-// then later:
-app.UseAuthentication(); // must be before UseAuthorization
+// ✅ Acum build
+var app = builder.Build();
+
+// Configure the HTTP request pipeline
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseSerilogRequestLogging();
+app.UseHttpsRedirection();
+
+// ✅ Ordinea corectă a middleware-ului
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
 
 try
@@ -85,5 +84,4 @@ finally
     Log.CloseAndFlush();
 }
 
-// Make Program class accessible for integration tests
 public partial class Program { }
