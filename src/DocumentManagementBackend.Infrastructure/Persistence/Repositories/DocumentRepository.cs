@@ -39,6 +39,13 @@ public class DocumentRepository : IDocumentRepository
     {
         _context.Documents.Update(document);
         await _context.SaveChangesAsync(cancellationToken);
+        
+        // Dispatch domain events după save
+        if (document.DomainEvents.Any())
+        {
+            await _dispatcher.DispatchAsync(document.DomainEvents, cancellationToken);
+            document.ClearDomainEvents();
+        }
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)

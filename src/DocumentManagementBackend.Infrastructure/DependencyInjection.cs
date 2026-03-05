@@ -3,6 +3,7 @@ using DocumentManagementBackend.Domain.Interfaces;
 using DocumentManagementBackend.Infrastructure.Auth;
 using DocumentManagementBackend.Infrastructure.Persistence;
 using DocumentManagementBackend.Infrastructure.Persistence.Repositories;
+using DocumentManagementBackend.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,9 @@ public static class DependencyInjection
         services.AddScoped<IDocumentRepository, DocumentRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IJwtTokenService, JwtTokenService>();
+        services.AddScoped<IEmailService, MockEmailService>();
+        services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
         
         return services;
     }
