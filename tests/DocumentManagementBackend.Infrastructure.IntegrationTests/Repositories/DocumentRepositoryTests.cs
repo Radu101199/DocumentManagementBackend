@@ -3,6 +3,7 @@ using DocumentManagementBackend.Domain.Entities;
 using DocumentManagementBackend.Domain.ValueObjects;
 using DocumentManagementBackend.Infrastructure.Persistence;
 using DocumentManagementBackend.Infrastructure.Persistence.Repositories;
+using DocumentManagementBackend.Infrastructure.Services;
 using NUnit.Framework;
 
 namespace DocumentManagementBackend.Infrastructure.IntegrationTests.Repositories;
@@ -11,6 +12,7 @@ public class DocumentRepositoryTests
 {
     private ApplicationDbContext _context;
     private DocumentRepository _repository;
+    private DomainEventDispatcher _dispatcher;
 
     [SetUp]
     public void Setup()
@@ -20,7 +22,7 @@ public class DocumentRepositoryTests
             .Options;
 
         _context = new ApplicationDbContext(options);
-        _repository = new DocumentRepository(_context);
+        _repository = new DocumentRepository(_context, _dispatcher);
     }
 
     [TearDown]

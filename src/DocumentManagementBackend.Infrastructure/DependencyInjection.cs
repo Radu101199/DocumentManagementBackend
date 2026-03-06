@@ -21,15 +21,13 @@ public static class DependencyInjection
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
         }
 
-        // Always register repositories
-        // Always register repositories
         services.AddScoped<IDocumentRepository, DocumentRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IJwtTokenService, JwtTokenService>();
         services.AddScoped<IEmailService, MockEmailService>();
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
-        
+
         return services;
     }
 }

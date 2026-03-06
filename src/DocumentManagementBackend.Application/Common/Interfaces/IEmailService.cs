@@ -1,8 +1,12 @@
 namespace DocumentManagementBackend.Application.Common.Interfaces;
 
-public interface INotificationService
+public interface IEmailService
 {
-    Task NotifyDocumentApprovedAsync(Guid documentId, Guid approverId, CancellationToken cancellationToken = default);
-    Task NotifyDocumentRejectedAsync(Guid documentId, Guid rejectorId, string reason, CancellationToken cancellationToken = default);
-    Task NotifyDocumentCreatedAsync(Guid documentId, Guid creatorId, CancellationToken cancellationToken = default);
+    Task SendAsync(EmailMessage message, CancellationToken cancellationToken = default);
 }
+
+public record EmailMessage(
+    string To,
+    string Subject,
+    string Body,
+    bool IsHtml = false);

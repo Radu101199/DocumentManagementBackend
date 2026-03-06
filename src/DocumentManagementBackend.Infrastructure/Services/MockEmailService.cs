@@ -1,3 +1,4 @@
+using DocumentManagementBackend.Application.Common.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace DocumentManagementBackend.Infrastructure.Services;

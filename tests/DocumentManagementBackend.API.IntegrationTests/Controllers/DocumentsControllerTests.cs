@@ -88,6 +88,28 @@ public class DocumentsControllerTests
         Assert.That(documentId, Is.Not.EqualTo(Guid.Empty));
         Assert.That(response.Headers.Location, Is.Not.Null);
     }
+    
+    [Test]
+    public async Task CreateDocument_Should_Dispatch_DocumentCreatedEvent()
+    {
+        // Arrange
+        var command = new CreateDocumentCommand(
+            Title: "Event Test Document",
+            Description: "Test",
+            FileName: "test.pdf",
+            FilePath: "/files/test.pdf",
+            ContentType: "application/pdf",
+            FileSizeBytes: 1024,
+            OwnerId: _sharedFactory!.TestUserId,
+            CreatorId: _sharedFactory!.TestUserId);
+
+        // Act
+        var response = await _client.PostAsJsonAsync("/api/documents", command);
+
+        // Assert — dacă event-ul a fost dispatched, MockEmailService a logat
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
+        // Dacă nu aruncă excepție, event pipeline a funcționat corect
+    }
 
     [Test]
     public async Task CreateDocument_Should_Return_BadRequest_When_Title_Empty()

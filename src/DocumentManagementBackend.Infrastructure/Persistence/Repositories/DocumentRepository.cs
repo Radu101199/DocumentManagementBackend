@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using DocumentManagementBackend.Application.Common.Interfaces;
 using DocumentManagementBackend.Domain.Entities;
 using DocumentManagementBackend.Domain.Interfaces;
 
@@ -7,10 +8,12 @@ namespace DocumentManagementBackend.Infrastructure.Persistence.Repositories;
 public class DocumentRepository : IDocumentRepository
 {
     private readonly ApplicationDbContext _context;
+    private readonly IDomainEventDispatcher _dispatcher;
 
-    public DocumentRepository(ApplicationDbContext context)
+    public DocumentRepository(ApplicationDbContext context, IDomainEventDispatcher dispatcher)
     {
         _context = context;
+        _dispatcher = dispatcher;
     }
 
     public async Task<Document?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
@@ -33,14 +36,19 @@ public class DocumentRepository : IDocumentRepository
     {
         await _context.Documents.AddAsync(document, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
+
+        if (document.DomainEvents.Any())
+        {
+            await _dispatcher.DispatchAsync(document.DomainEvents, cancellationToken);
+            document.ClearDomainEvents();
+        }
     }
 
     public async Task UpdateAsync(Document document, CancellationToken cancellationToken = default)
     {
         _context.Documents.Update(document);
         await _context.SaveChangesAsync(cancellationToken);
-        
-        // Dispatch domain events după save
+
         if (document.DomainEvents.Any())
         {
             await _dispatcher.DispatchAsync(document.DomainEvents, cancellationToken);

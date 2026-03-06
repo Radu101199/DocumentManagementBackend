@@ -1,5 +1,6 @@
 using DocumentManagementBackend.Application.Common.Interfaces;
 using DocumentManagementBackend.Domain.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace DocumentManagementBackend.Infrastructure.Services;
 
@@ -22,10 +23,7 @@ public class NotificationService : INotificationService
         _logger = logger;
     }
 
-    public async Task NotifyDocumentApprovedAsync(
-        Guid documentId,
-        Guid approverId,
-        CancellationToken cancellationToken = default)
+    public async Task NotifyDocumentApprovedAsync(Guid documentId, Guid approverId, CancellationToken cancellationToken = default)
     {
         var document = await _documentRepository.GetByIdAsync(documentId, cancellationToken);
         if (document == null) return;
@@ -40,11 +38,7 @@ public class NotificationService : INotificationService
             cancellationToken);
     }
 
-    public async Task NotifyDocumentRejectedAsync(
-        Guid documentId,
-        Guid rejectorId,
-        string reason,
-        CancellationToken cancellationToken = default)
+    public async Task NotifyDocumentRejectedAsync(Guid documentId, Guid rejectorId, string reason, CancellationToken cancellationToken = default)
     {
         var document = await _documentRepository.GetByIdAsync(documentId, cancellationToken);
         if (document == null) return;
@@ -59,10 +53,7 @@ public class NotificationService : INotificationService
             cancellationToken);
     }
 
-    public async Task NotifyDocumentCreatedAsync(
-        Guid documentId,
-        Guid creatorId,
-        CancellationToken cancellationToken = default)
+    public async Task NotifyDocumentCreatedAsync(Guid documentId, Guid creatorId, CancellationToken cancellationToken = default)
     {
         var creator = await _userRepository.GetByIdAsync(creatorId, cancellationToken);
         if (creator == null) return;

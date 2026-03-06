@@ -1,12 +1,12 @@
 using DocumentManagementBackend.Application.Common.Interfaces;
-using DocumentManagementBackend.Application.Common.Interfaces;
+using DocumentManagementBackend.Application.Common.Models;
 using DocumentManagementBackend.Domain.Events;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace DocumentManagementBackend.Application.Features.Documents.EventHandlers;
 
-public class DocumentCreatedEventHandler : INotificationHandler<DocumentCreatedEvent>
+public class DocumentCreatedEventHandler : INotificationHandler<DomainEventNotification<DocumentCreatedEvent>>
 {
     private readonly INotificationService _notificationService;
     private readonly ILogger<DocumentCreatedEventHandler> _logger;
@@ -19,16 +19,18 @@ public class DocumentCreatedEventHandler : INotificationHandler<DocumentCreatedE
         _logger = logger;
     }
 
-    public async Task Handle(DocumentCreatedEvent notification, CancellationToken cancellationToken)
+    public async Task Handle(DomainEventNotification<DocumentCreatedEvent> notification, CancellationToken cancellationToken)
     {
+        var domainEvent = notification.DomainEvent;
+
         _logger.LogInformation(
             "Document {DocumentId} created by {CreatorId}",
-            notification.DocumentId,
-            notification.CreatorId);
+            domainEvent.DocumentId,
+            domainEvent.ActorId);
 
         await _notificationService.NotifyDocumentCreatedAsync(
-            notification.DocumentId,
-            notification.CreatorId,
+            domainEvent.DocumentId,
+            domainEvent.ActorId,
             cancellationToken);
     }
 }

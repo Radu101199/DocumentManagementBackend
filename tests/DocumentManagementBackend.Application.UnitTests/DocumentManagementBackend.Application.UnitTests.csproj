@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
@@ -30,6 +30,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\DocumentManagementBackend.Application\DocumentManagementBackend.Application.csproj" />
       <ProjectReference Include="..\..\src\DocumentManagementBackend.Domain\DocumentManagementBackend.Domain.csproj" />
+      <ProjectReference Include="..\..\src\DocumentManagementBackend.Infrastructure\DocumentManagementBackend.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

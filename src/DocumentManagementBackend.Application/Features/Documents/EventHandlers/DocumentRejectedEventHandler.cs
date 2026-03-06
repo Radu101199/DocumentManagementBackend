@@ -1,11 +1,12 @@
 using DocumentManagementBackend.Application.Common.Interfaces;
+using DocumentManagementBackend.Application.Common.Models;
 using DocumentManagementBackend.Domain.Events;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace DocumentManagementBackend.Application.Features.Documents.EventHandlers;
 
-public class DocumentRejectedEventHandler : INotificationHandler<DocumentRejectedEvent>
+public class DocumentRejectedEventHandler : INotificationHandler<DomainEventNotification<DocumentRejectedEvent>>
 {
     private readonly INotificationService _notificationService;
     private readonly ILogger<DocumentRejectedEventHandler> _logger;
@@ -18,17 +19,19 @@ public class DocumentRejectedEventHandler : INotificationHandler<DocumentRejecte
         _logger = logger;
     }
 
-    public async Task Handle(DocumentRejectedEvent notification, CancellationToken cancellationToken)
+    public async Task Handle(DomainEventNotification<DocumentRejectedEvent> notification, CancellationToken cancellationToken)
     {
+        var domainEvent = notification.DomainEvent;
+
         _logger.LogInformation(
             "Document {DocumentId} rejected by {RejectorId}",
-            notification.DocumentId,
-            notification.RejectorId);
+            domainEvent.DocumentId,
+            domainEvent.RejectorId);
 
         await _notificationService.NotifyDocumentRejectedAsync(
-            notification.DocumentId,
-            notification.RejectorId,
-            notification.Reason,
+            domainEvent.DocumentId,
+            domainEvent.RejectorId,
+            domainEvent.RejectionReason,
             cancellationToken);
     }
 }
