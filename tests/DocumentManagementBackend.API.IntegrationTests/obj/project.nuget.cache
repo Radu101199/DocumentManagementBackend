@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LW8vBETau0Y=",
+  "dgSpecHash": "CGEwBxB3e/0=",
   "success": true,
   "projectFilePath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.API.IntegrationTests/DocumentManagementBackend.API.IntegrationTests.csproj",
   "expectedPackageFiles": [
@@ -80,6 +80,8 @@
     "/Users/paunradu/.nuget/packages/nunit3testadapter/6.1.0/nunit3testadapter.6.1.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/serilog/4.3.0/serilog.4.3.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/serilog.aspnetcore/10.0.0/serilog.aspnetcore.10.0.0.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/serilog.enrichers.environment/3.0.1/serilog.enrichers.environment.3.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/serilog.enrichers.thread/4.0.0/serilog.enrichers.thread.4.0.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/serilog.extensions.hosting/10.0.0/serilog.extensions.hosting.10.0.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/serilog.extensions.logging/10.0.0/serilog.extensions.logging.10.0.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/serilog.formatting.compact/3.0.0/serilog.formatting.compact.3.0.0.nupkg.sha512",
