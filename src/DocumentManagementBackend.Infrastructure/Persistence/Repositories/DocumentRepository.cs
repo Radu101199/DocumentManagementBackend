@@ -1,3 +1,4 @@
+using DocumentManagementBackend.Application.Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using DocumentManagementBackend.Application.Common.Interfaces;
 using DocumentManagementBackend.Domain.Entities;
@@ -34,25 +35,63 @@ public class DocumentRepository : IDocumentRepository
 
     public async Task AddAsync(Document document, CancellationToken cancellationToken = default)
     {
-        await _context.Documents.AddAsync(document, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
-
-        if (document.DomainEvents.Any())
+        // ✅ Tranzacție explicită
+        await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+        try
         {
-            await _dispatcher.DispatchAsync(document.DomainEvents, cancellationToken);
-            document.ClearDomainEvents();
+            await _context.Documents.AddAsync(document, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            if (document.DomainEvents.Any())
+            {
+                await _dispatcher.DispatchAsync(document.DomainEvents, cancellationToken);
+                document.ClearDomainEvents();
+            }
+
+            await transaction.CommitAsync(cancellationToken);
+        }
+        catch
+        {
+            await transaction.RollbackAsync(cancellationToken);
+            throw;
         }
     }
 
     public async Task UpdateAsync(Document document, CancellationToken cancellationToken = default)
     {
-        _context.Documents.Update(document);
-        await _context.SaveChangesAsync(cancellationToken);
-
-        if (document.DomainEvents.Any())
+        await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+        try
         {
-            await _dispatcher.DispatchAsync(document.DomainEvents, cancellationToken);
-            document.ClearDomainEvents();
+            _context.Documents.Update(document);
+
+            // ✅ Prinde concurrency conflicts
+            try
+            {
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                throw new ConcurrencyException(
+                    $"Document {document.Id} was modified by another user. Please refresh and try again.", ex);
+            }
+
+            if (document.DomainEvents.Any())
+            {
+                await _dispatcher.DispatchAsync(document.DomainEvents, cancellationToken);
+                document.ClearDomainEvents();
+            }
+
+            await transaction.CommitAsync(cancellationToken);
+        }
+        catch (ConcurrencyException)
+        {
+            throw;
+        }
+        catch
+        {
+            await transaction.RollbackAsync(cancellationToken);
+            throw;
         }
     }
 

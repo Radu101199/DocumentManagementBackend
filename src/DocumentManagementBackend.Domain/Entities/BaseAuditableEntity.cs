@@ -8,4 +8,6 @@ public abstract class BaseAuditableEntity : IAuditableEntity
     public string? CreatedBy { get; set; }
     public DateTime? UpdatedAt { get; set; }
     public string? UpdatedBy { get; set; }
+    
+    public byte[] RowVersion { get; set; } = null!;
 }

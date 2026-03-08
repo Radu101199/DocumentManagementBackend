@@ -13,17 +13,32 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
     public DbSet<User> Users => Set<User>();
     public DbSet<Document> Documents => Set<Document>();
-    
-    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        return base.SaveChangesAsync(cancellationToken);
+        // ✅ Auto-set audit fields
+        var entries = ChangeTracker.Entries<BaseAuditableEntity>();
+
+        foreach (var entry in entries)
+        {
+            switch (entry.State)
+            {
+                case EntityState.Added:
+                    entry.Entity.CreatedAt = DateTime.UtcNow;
+                    entry.Entity.UpdatedAt = DateTime.UtcNow;
+                    break;
+                case EntityState.Modified:
+                    entry.Entity.UpdatedAt = DateTime.UtcNow;
+                    break;
+            }
+        }
+
+        return await base.SaveChangesAsync(cancellationToken);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Setează schema default
         modelBuilder.HasDefaultSchema("DocumentManagement");
-        
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }

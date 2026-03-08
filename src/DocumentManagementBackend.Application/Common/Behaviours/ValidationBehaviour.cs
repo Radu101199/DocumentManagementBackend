@@ -4,7 +4,7 @@ using MediatR;
 namespace DocumentManagementBackend.Application.Common.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : notnull
+    where TRequest : IRequest<TResponse>
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -19,9 +19,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         CancellationToken cancellationToken)
     {
         if (!_validators.Any())
-        {
             return await next();
-        }
 
         var context = new ValidationContext<TRequest>(request);
 
@@ -29,14 +27,12 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
             _validators.Select(v => v.ValidateAsync(context, cancellationToken)));
 
         var failures = validationResults
-            .Where(r => r.Errors.Any())
             .SelectMany(r => r.Errors)
+            .Where(f => f != null)
             .ToList();
 
-        if (failures.Any())
-        {
+        if (failures.Count != 0)
             throw new ValidationException(failures);
-        }
 
         return await next();
     }

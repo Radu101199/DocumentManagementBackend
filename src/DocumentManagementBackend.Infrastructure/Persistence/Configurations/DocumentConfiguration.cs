@@ -31,6 +31,10 @@ public class DocumentConfiguration : IEntityTypeConfiguration<Document>
 
         builder.Property(x => x.FileSizeBytes)
             .IsRequired();
+        
+        builder.Property(x => x.RowVersion)
+            .IsRowVersion()
+            .IsConcurrencyToken();
 
         builder.HasIndex(x => x.OwnerId);
         builder.HasIndex(x => x.Status);
