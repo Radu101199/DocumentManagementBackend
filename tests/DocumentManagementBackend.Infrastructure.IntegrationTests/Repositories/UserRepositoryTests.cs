@@ -9,8 +9,8 @@ namespace DocumentManagementBackend.Infrastructure.IntegrationTests.Repositories
 
 public class UserRepositoryTests
 {
-    private ApplicationDbContext _context;
-    private UserRepository _repository;
+    private ApplicationDbContext _context = null!;
+    private UserRepository _repository = null!;
 
     [SetUp]
     public void Setup()

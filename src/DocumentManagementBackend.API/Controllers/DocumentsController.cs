@@ -32,9 +32,10 @@ public class DocumentsController : ControllerBase
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetById(Guid id)
+    public Task<IActionResult> GetById(Guid id)
     {
-        return Ok(new { id, message = "GetDocumentQuery not implemented yet" });
+        return Task.FromResult<IActionResult>(
+            Ok(new { id, message = "GetDocumentQuery not implemented yet" }));
     }
 
     [HttpPost("{id}/review")]

@@ -7,8 +7,8 @@ namespace DocumentManagementBackend.API.IntegrationTests;
 [TestFixture]
 public class LoggingTests
 {
-    private WebApplicationFactory<Program> _factory;
-    private HttpClient _client;
+    private WebApplicationFactory<Program> _factory = null!;
+    private HttpClient _client = null!;
 
     [SetUp]
     public void Setup()

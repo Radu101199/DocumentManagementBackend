@@ -21,7 +21,7 @@ public class RejectDocumentCommandHandler : IRequestHandler<RejectDocumentComman
             throw new NotFoundException(nameof(document), request.DocumentId);
         }
         // 2. Call domain method - this will validate business rules and throw if invalid
-        document.Reject(request.RejectorId, request.RejectionReason);
+        document.Reject(request.RejectorId, request.RejectionReason!);
         // 3. Update repository
         await _documentRepository.UpdateAsync(document, cancellationToken);
         

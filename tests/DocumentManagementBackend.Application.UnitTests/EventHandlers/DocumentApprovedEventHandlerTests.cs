@@ -45,7 +45,7 @@ public class DocumentApprovedEventHandlerTests
     }
 
     [Test]
-    public async Task Handle_Should_Not_Throw_When_Notification_Succeeds()
+    public void Handle_Should_Not_Throw_When_Notification_Succeeds()
     {
         // Arrange
         var domainEvent = new DocumentApprovedEvent(Guid.NewGuid(), Guid.NewGuid(), null);
