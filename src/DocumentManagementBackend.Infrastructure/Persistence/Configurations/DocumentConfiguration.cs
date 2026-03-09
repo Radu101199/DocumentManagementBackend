@@ -32,8 +32,11 @@ public class DocumentConfiguration : IEntityTypeConfiguration<Document>
         builder.Property(x => x.FileSizeBytes)
             .IsRequired();
         
-        builder.Property(x => x.RowVersion)
-            .IsRowVersion()
+        // În DocumentConfiguration — înlocuiește RowVersion cu:
+        builder.Property<uint>("xmin")
+            .HasColumnName("xmin")
+            .HasColumnType("xid")
+            .ValueGeneratedOnAddOrUpdate()
             .IsConcurrencyToken();
 
         builder.HasIndex(x => x.OwnerId);

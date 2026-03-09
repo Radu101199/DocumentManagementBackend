@@ -1,8 +1,8 @@
 using DocumentManagementBackend.Application.Common.Exceptions;
-using Microsoft.EntityFrameworkCore;
 using DocumentManagementBackend.Application.Common.Interfaces;
 using DocumentManagementBackend.Domain.Entities;
 using DocumentManagementBackend.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace DocumentManagementBackend.Infrastructure.Persistence.Repositories;
 
@@ -19,6 +19,7 @@ public class DocumentRepository : IDocumentRepository
 
     public async Task<Document?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
+        // ✅ Fără AsNoTracking — EF trebuie să trackeze RowVersion pentru concurrency
         return await _context.Documents
             .Include(d => d.Owner)
             .FirstOrDefaultAsync(d => d.Id == id, cancellationToken);
@@ -35,7 +36,6 @@ public class DocumentRepository : IDocumentRepository
 
     public async Task AddAsync(Document document, CancellationToken cancellationToken = default)
     {
-        // ✅ Tranzacție explicită
         await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
         try
         {
@@ -64,7 +64,6 @@ public class DocumentRepository : IDocumentRepository
         {
             _context.Documents.Update(document);
 
-            // ✅ Prinde concurrency conflicts
             try
             {
                 await _context.SaveChangesAsync(cancellationToken);
@@ -72,8 +71,16 @@ public class DocumentRepository : IDocumentRepository
             catch (DbUpdateConcurrencyException ex)
             {
                 await transaction.RollbackAsync(cancellationToken);
+
+                // ✅ Verifică dacă documentul a fost șters sau doar modificat
+                var entry = ex.Entries.Single();
+                var databaseValues = await entry.GetDatabaseValuesAsync(cancellationToken);
+
                 throw new ConcurrencyException(
-                    $"Document {document.Id} was modified by another user. Please refresh and try again.", ex);
+                    databaseValues == null
+                        ? $"Document {document.Id} was deleted by another user."
+                        : $"Document {document.Id} was modified by another user. Please refresh and try again.",
+                    ex);
             }
 
             if (document.DomainEvents.Any())
@@ -97,11 +104,39 @@ public class DocumentRepository : IDocumentRepository
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var document = await GetByIdAsync(id, cancellationToken);
-        if (document != null)
+        await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+        try
         {
+            var document = await GetByIdAsync(id, cancellationToken);
+            if (document == null)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                return;
+            }
+
             _context.Documents.Remove(document);
-            await _context.SaveChangesAsync(cancellationToken);
+
+            try
+            {
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                throw new ConcurrencyException(
+                    $"Document {id} was already modified or deleted by another user.", ex);
+            }
+
+            await transaction.CommitAsync(cancellationToken);
+        }
+        catch (ConcurrencyException)
+        {
+            throw;
+        }
+        catch
+        {
+            await transaction.RollbackAsync(cancellationToken);
+            throw;
         }
     }
 }

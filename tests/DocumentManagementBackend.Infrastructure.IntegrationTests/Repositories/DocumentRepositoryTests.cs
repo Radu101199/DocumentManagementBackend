@@ -1,3 +1,4 @@
+using DocumentManagementBackend.Application.Common.Exceptions;
 using DocumentManagementBackend.Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using DocumentManagementBackend.Domain.Entities;
@@ -187,4 +188,34 @@ public class DocumentRepositoryTests
         var deleted = await _repository.GetByIdAsync(document.Id);
         Assert.That(deleted, Is.Null);
     }
+    
+    [Test]
+    public async Task UpdateAsync_Should_Throw_ConcurrencyException_When_Concurrent_Update()
+    {
+        // Arrange — seed document
+        var owner = User.Create(Email.Create("owner@test.com"), "Test", "User", "hash");
+        await _context.Users.AddAsync(owner);
+        await _context.SaveChangesAsync();
+
+        var document = Document.Create(
+            "Original", "Desc", "file.pdf", "/path",
+            "application/pdf", 1024, owner.Id, owner.Id);
+        await _repository.AddAsync(document);
+
+        // Simulează doi useri care iau același document
+        var documentForUserA = await _repository.GetByIdAsync(document.Id);
+        var documentForUserB = await _repository.GetByIdAsync(document.Id);
+
+        // User A face update primul
+        documentForUserA!.UpdateMetadata("Updated by User A", null);
+        await _repository.UpdateAsync(documentForUserA);
+
+        // User B încearcă să facă update cu RowVersion vechi
+        documentForUserB!.UpdateMetadata("Updated by User B", null);
+
+        // Assert — User B primește ConcurrencyException
+        Assert.ThrowsAsync<ConcurrencyException>(
+            () => _repository.UpdateAsync(documentForUserB));
+    }
+    
 }

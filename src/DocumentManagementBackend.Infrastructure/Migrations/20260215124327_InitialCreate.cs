@@ -11,6 +11,8 @@ namespace DocumentManagementBackend.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.Sql("CREATE SCHEMA IF NOT EXISTS \"DocumentManagement\";");
+
             migrationBuilder.EnsureSchema(
                 name: "DocumentManagement");
 
