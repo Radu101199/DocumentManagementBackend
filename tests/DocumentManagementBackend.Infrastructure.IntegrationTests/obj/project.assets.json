@@ -1306,6 +1306,7 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "BCrypt.Net-Next": "4.1.0",
           "DocumentManagementBackend.Domain": "1.0.0",
+          "DocumentManagementBackend.Infrastructure": "1.0.0",
           "FluentValidation": "12.1.1",
           "FluentValidation.DependencyInjectionExtensions": "12.1.1",
           "MediatR": "13.1.0",
@@ -3237,5 +3238,16 @@
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.311/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1108",
+      "level": "Error",
+      "message": "Cycle detected. \n  DocumentManagementBackend.Infrastructure.IntegrationTests -> DocumentManagementBackend.Infrastructure -> DocumentManagementBackend.Application -> DocumentManagementBackend.Infrastructure.",
+      "libraryId": "DocumentManagementBackend.Infrastructure",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }

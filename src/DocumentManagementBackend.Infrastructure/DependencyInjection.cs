@@ -18,7 +18,9 @@ public static class DependencyInjection
         if (environment != "Testing")
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
+                    npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(
+                        "__EFMigrationsHistory", "DocumentManagement")));
         }
 
         services.AddScoped<IDocumentRepository, DocumentRepository>();

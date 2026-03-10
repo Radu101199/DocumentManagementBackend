@@ -1,3 +1,4 @@
+using DocumentManagementBackend.Application.Common.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using DocumentManagementBackend.Application.Features.Documents.Commands.CreateDocument;
@@ -5,12 +6,16 @@ using DocumentManagementBackend.Application.Features.Documents.Commands.ApproveD
 using DocumentManagementBackend.Application.Features.Documents.Commands.RejectDocument;
 using DocumentManagementBackend.Application.Features.Documents.Commands.CancelApproval;
 using DocumentManagementBackend.Application.Features.Documents.Commands.MarkReviewed;
+using DocumentManagementBackend.Application.Features.Documents.Queries.GetDocuments;
+using DocumentManagementBackend.Application.Features.Documents.Queries.GetDocumentById;
+using DocumentManagementBackend.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 
 namespace DocumentManagementBackend.API.Controllers;
+
 [ApiController]
 [Route("api/[controller]")]
-[Authorize] // 🔐 toate endpoint-urile necesită token
+[Authorize]
 public class DocumentsController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -20,6 +25,32 @@ public class DocumentsController : ControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>Get paginated documents with filtering and sorting</summary>
+    [HttpGet]
+    [ProducesResponseType(typeof(PagedResult<DocumentDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAll(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 20,
+        [FromQuery] Guid? ownerId = null,
+        [FromQuery] DocumentStatus? status = null,
+        [FromQuery] string? sortBy = null)
+    {
+        var query = new GetDocumentsQuery(page, pageSize, ownerId, status, sortBy);
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+
+    /// <summary>Get document by ID</summary>
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(DocumentDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        var query = new GetDocumentByIdQuery(id);
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+
     [HttpPost]
     [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -27,15 +58,6 @@ public class DocumentsController : ControllerBase
     {
         var documentId = await _mediator.Send(command);
         return CreatedAtAction(nameof(GetById), new { id = documentId }, documentId);
-    }
-
-    [HttpGet("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public Task<IActionResult> GetById(Guid id)
-    {
-        return Task.FromResult<IActionResult>(
-            Ok(new { id, message = "GetDocumentQuery not implemented yet" }));
     }
 
     [HttpPost("{id}/review")]
@@ -50,7 +72,7 @@ public class DocumentsController : ControllerBase
     }
 
     [HttpPost("{id}/approve")]
-    [Authorize(Roles = "Admin")] // 👑 doar Admin
+    [Authorize(Roles = "Admin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -62,7 +84,7 @@ public class DocumentsController : ControllerBase
     }
 
     [HttpPost("{id}/reject")]
-    [Authorize(Roles = "Admin")] // 👑 doar Admin
+    [Authorize(Roles = "Admin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

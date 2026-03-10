@@ -143,6 +143,9 @@
             "projectReferences": {
               "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Domain/DocumentManagementBackend.Domain.csproj": {
                 "projectPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Domain/DocumentManagementBackend.Domain.csproj"
+              },
+              "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/DocumentManagementBackend.Infrastructure.csproj": {
+                "projectPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/DocumentManagementBackend.Infrastructure.csproj"
               }
             }
           }
