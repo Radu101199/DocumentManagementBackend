@@ -1,32 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-
     <ItemGroup>
-      <Folder Include="Common\Mappings\" />
-      <Folder Include="Features\Notifications\Commands\" />
-      <Folder Include="Features\Notifications\Queries\" />
-      <Folder Include="Features\Users\Commands\" />
-      <Folder Include="Features\Users\Queries\" />
+        <Folder Include="Common\Mappings\" />
+        <Folder Include="Features\Notifications\Commands\" />
+        <Folder Include="Features\Notifications\Queries\" />
+        <Folder Include="Features\Users\Commands\" />
+        <Folder Include="Features\Users\Queries\" />
     </ItemGroup>
-
     <ItemGroup>
-      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-      <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
-      <PackageReference Include="FluentValidation" Version="12.1.1" />
-      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
-      <PackageReference Include="MediatR" Version="13.1.0" />
-      <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+        <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
+        <PackageReference Include="FluentValidation" Version="12.1.1" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+        <PackageReference Include="MediatR" Version="13.1.0" />
+        <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
     </ItemGroup>
-
     <ItemGroup>
-      <ProjectReference Include="..\DocumentManagementBackend.Domain\DocumentManagementBackend.Domain.csproj" />
-      <ProjectReference Include="..\DocumentManagementBackend.Infrastructure\DocumentManagementBackend.Infrastructure.csproj" />
+        <ProjectReference Include="..\DocumentManagementBackend.Domain\DocumentManagementBackend.Domain.csproj" />
     </ItemGroup>
-
 </Project>

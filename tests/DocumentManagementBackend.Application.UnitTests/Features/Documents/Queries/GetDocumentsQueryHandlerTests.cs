@@ -30,11 +30,16 @@ public class GetDocumentsQueryHandlerTests
             Email.Create("owner@test.com"),
             "John", "Doe", "hash", UserRole.User);
         _context.Users.Add(_testUser);
+        
+        // Creează un al doilea user pentru doc3
+        var otherUser = User.Create(
+            Email.Create("other@test.com"),
+            "Jane", "Doe", "hash", UserRole.User);
+        _context.Users.Add(otherUser);
 
-        // Seed documents
         var doc1 = Document.Create("Alpha", "Desc", "a.pdf", "/a", "application/pdf", 1024, _testUser.Id, _testUser.Id);
         var doc2 = Document.Create("Beta", "Desc", "b.pdf", "/b", "application/pdf", 2048, _testUser.Id, _testUser.Id);
-        var doc3 = Document.Create("Gamma", "Desc", "c.pdf", "/c", "application/pdf", 3072, Guid.NewGuid(), Guid.NewGuid());
+        var doc3 = Document.Create("Gamma", "Desc", "c.pdf", "/c", "application/pdf", 3072, otherUser.Id, otherUser.Id);
 
         _context.Documents.AddRange(doc1, doc2, doc3);
         await _context.SaveChangesAsync();

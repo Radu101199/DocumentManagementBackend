@@ -29,9 +29,6 @@
             "projectReferences": {
               "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Domain/DocumentManagementBackend.Domain.csproj": {
                 "projectPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Domain/DocumentManagementBackend.Domain.csproj"
-              },
-              "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/DocumentManagementBackend.Infrastructure.csproj": {
-                "projectPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/DocumentManagementBackend.Infrastructure.csproj"
               }
             }
           }
@@ -76,7 +73,7 @@
               "target": "Package",
               "version": "[2.0.1, )"
             },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.1, )"
             }
@@ -141,100 +138,6 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.311/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/DocumentManagementBackend.Infrastructure.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/DocumentManagementBackend.Infrastructure.csproj",
-        "projectName": "DocumentManagementBackend.Infrastructure",
-        "projectPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/DocumentManagementBackend.Infrastructure.csproj",
-        "packagesPath": "/Users/paunradu/.nuget/packages/",
-        "outputPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/Users/paunradu/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net9.0"
-        ],
-        "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
-            "projectReferences": {
-              "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Application/DocumentManagementBackend.Application.csproj": {
-                "projectPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Application/DocumentManagementBackend.Application.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
-      },
-      "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
-          "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.InMemory": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "Microsoft.Extensions.Caching.Memory": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "Microsoft.Extensions.Configuration.Abstractions": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "Microsoft.Extensions.DependencyInjection.Abstractions": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "Microsoft.Extensions.Hosting.Abstractions": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "System.IdentityModel.Tokens.Jwt": {
-              "target": "Package",
-              "version": "[8.16.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",

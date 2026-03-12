@@ -6,6 +6,7 @@ using DocumentManagementBackend.Domain.ValueObjects;
 using DocumentManagementBackend.Infrastructure.Persistence;
 using DocumentManagementBackend.Infrastructure.Persistence.Repositories;
 using DocumentManagementBackend.Infrastructure.Services;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Moq;
 using NUnit.Framework;
 
@@ -21,7 +22,8 @@ public class DocumentRepositoryTests
     public void Setup()
     {
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+            .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
             .Options;
 
         _context = new ApplicationDbContext(options);

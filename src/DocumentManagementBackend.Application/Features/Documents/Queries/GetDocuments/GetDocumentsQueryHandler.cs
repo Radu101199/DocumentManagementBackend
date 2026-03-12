@@ -1,6 +1,7 @@
+using DocumentManagementBackend.Application.Common.Interfaces;
 using DocumentManagementBackend.Application.Common.Models;
+using DocumentManagementBackend.Application.Features.Documents.Queries;
 using DocumentManagementBackend.Domain.Enums;
-using DocumentManagementBackend.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,9 +9,9 @@ namespace DocumentManagementBackend.Application.Features.Documents.Queries.GetDo
 
 public class GetDocumentsQueryHandler : IRequestHandler<GetDocumentsQuery, PagedResult<DocumentDto>>
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IApplicationDbContext _context;
 
-    public GetDocumentsQueryHandler(ApplicationDbContext context)
+    public GetDocumentsQueryHandler(IApplicationDbContext context)
     {
         _context = context;
     }
@@ -19,23 +20,20 @@ public class GetDocumentsQueryHandler : IRequestHandler<GetDocumentsQuery, Paged
         GetDocumentsQuery request,
         CancellationToken cancellationToken)
     {
-        // ✅ Validare page/pageSize
         var page = Math.Max(1, request.Page);
         var pageSize = Math.Clamp(request.PageSize, 1, 100);
 
         var query = _context.Documents
             .Include(d => d.Owner)
-            .AsNoTracking() // ✅ Read-only query — mai rapid
+            .AsNoTracking()
             .AsQueryable();
 
-        // ✅ Filtering
         if (request.OwnerId.HasValue)
             query = query.Where(d => d.OwnerId == request.OwnerId.Value);
 
         if (request.Status.HasValue)
             query = query.Where(d => d.Status == request.Status.Value);
 
-        // ✅ Sorting
         query = request.SortBy switch
         {
             "title_asc"      => query.OrderBy(d => d.Title),
@@ -44,13 +42,11 @@ public class GetDocumentsQueryHandler : IRequestHandler<GetDocumentsQuery, Paged
             "createdAt_desc" => query.OrderByDescending(d => d.CreatedAt),
             "status_asc"     => query.OrderBy(d => d.Status),
             "status_desc"    => query.OrderByDescending(d => d.Status),
-            _                => query.OrderByDescending(d => d.CreatedAt) // default
+            _                => query.OrderByDescending(d => d.CreatedAt)
         };
 
-        // ✅ Count înainte de paginare
         var totalCount = await query.CountAsync(cancellationToken);
 
-        // ✅ Paginare
         var items = await query
             .Skip((page - 1) * pageSize)
             .Take(pageSize)

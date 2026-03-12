@@ -29,7 +29,9 @@ public static class DependencyInjection
         services.AddScoped<IEmailService, MockEmailService>();
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
-
+        services.AddScoped<IApplicationDbContext>(provider => 
+            provider.GetRequiredService<ApplicationDbContext>());
+        
         return services;
     }
 }

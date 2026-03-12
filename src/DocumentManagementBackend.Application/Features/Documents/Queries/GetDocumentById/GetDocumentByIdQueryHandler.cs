@@ -1,16 +1,19 @@
 using DocumentManagementBackend.Application.Common.Exceptions;
+using DocumentManagementBackend.Application.Common.Interfaces;
+using DocumentManagementBackend.Application.Features.Documents.Queries;
 using DocumentManagementBackend.Application.Features.Documents.Queries.GetDocuments;
-using DocumentManagementBackend.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using DocumentManagementBackend.Domain.Entities;
+
 
 namespace DocumentManagementBackend.Application.Features.Documents.Queries.GetDocumentById;
 
 public class GetDocumentByIdQueryHandler : IRequestHandler<GetDocumentByIdQuery, DocumentDto>
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IApplicationDbContext _context;
 
-    public GetDocumentByIdQueryHandler(ApplicationDbContext context)
+    public GetDocumentByIdQueryHandler(IApplicationDbContext context)
     {
         _context = context;
     }
@@ -40,7 +43,7 @@ public class GetDocumentByIdQueryHandler : IRequestHandler<GetDocumentByIdQuery,
             .FirstOrDefaultAsync(cancellationToken);
 
         if (document is null)
-            throw new NotFoundException(nameof(document), request.Id);
+            throw new NotFoundException(nameof(Document), request.Id);
 
         return document;
     }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DocumentManagementBackend.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e1f39c3e1ef4bca4385c3d4052c91d22cc8356d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5434bb77a36a5a93b12b588c13ca7da523a248d")]
 [assembly: System.Reflection.AssemblyProductAttribute("DocumentManagementBackend.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DocumentManagementBackend.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

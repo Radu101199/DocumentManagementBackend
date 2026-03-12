@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "gty8TiLK3kE=",
-  "success": false,
+  "dgSpecHash": "RlFoUFlXQxE=",
+  "success": true,
   "projectFilePath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Application/DocumentManagementBackend.Application.csproj",
   "expectedPackageFiles": [
     "/Users/paunradu/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
@@ -12,42 +12,21 @@
     "/Users/paunradu/.nuget/packages/mediatr/13.1.0/mediatr.13.1.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.entityframeworkcore/9.0.0/microsoft.entityframeworkcore.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.0/microsoft.entityframeworkcore.abstractions.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.entityframeworkcore.analyzers/9.0.0/microsoft.entityframeworkcore.analyzers.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.entityframeworkcore.inmemory/9.0.0/microsoft.entityframeworkcore.inmemory.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.entityframeworkcore.relational/9.0.0/microsoft.entityframeworkcore.relational.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.extensions.caching.abstractions/9.0.0/microsoft.extensions.caching.abstractions.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.extensions.caching.memory/9.0.0/microsoft.extensions.caching.memory.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.0/microsoft.extensions.configuration.abstractions.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.0/microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.0/microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.extensions.diagnostics.abstractions/9.0.0/microsoft.extensions.diagnostics.abstractions.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.extensions.fileproviders.abstractions/9.0.0/microsoft.extensions.fileproviders.abstractions.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.extensions.hosting.abstractions/9.0.0/microsoft.extensions.hosting.abstractions.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.extensions.logging/9.0.0/microsoft.extensions.logging.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.0/microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.extensions.options/9.0.0/microsoft.extensions.options.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.extensions.primitives/9.0.0/microsoft.extensions.primitives.9.0.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.identitymodel.abstractions/8.16.0/microsoft.identitymodel.abstractions.8.16.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.16.0/microsoft.identitymodel.jsonwebtokens.8.16.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.identitymodel.logging/8.16.0/microsoft.identitymodel.logging.8.16.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/microsoft.identitymodel.tokens/8.16.0/microsoft.identitymodel.tokens.8.16.0.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/npgsql/9.0.1/npgsql.9.0.1.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/npgsql.entityframeworkcore.postgresql/9.0.1/npgsql.entityframeworkcore.postgresql.9.0.1.nupkg.sha512",
-    "/Users/paunradu/.nuget/packages/system.identitymodel.tokens.jwt/8.16.0/system.identitymodel.tokens.jwt.8.16.0.nupkg.sha512"
+    "/Users/paunradu/.nuget/packages/microsoft.entityframeworkcore/9.0.1/microsoft.entityframeworkcore.9.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.1/microsoft.entityframeworkcore.abstractions.9.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.entityframeworkcore.analyzers/9.0.1/microsoft.entityframeworkcore.analyzers.9.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.extensions.caching.abstractions/9.0.1/microsoft.extensions.caching.abstractions.9.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.extensions.caching.memory/9.0.1/microsoft.extensions.caching.memory.9.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.1/microsoft.extensions.dependencyinjection.9.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.1/microsoft.extensions.dependencyinjection.abstractions.9.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.extensions.logging/9.0.1/microsoft.extensions.logging.9.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.1/microsoft.extensions.logging.abstractions.9.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.extensions.options/9.0.1/microsoft.extensions.options.9.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.extensions.primitives/9.0.1/microsoft.extensions.primitives.9.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.identitymodel.abstractions/8.14.0/microsoft.identitymodel.abstractions.8.14.0.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.14.0/microsoft.identitymodel.jsonwebtokens.8.14.0.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.identitymodel.logging/8.14.0/microsoft.identitymodel.logging.8.14.0.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.identitymodel.tokens/8.14.0/microsoft.identitymodel.tokens.8.14.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1108",
-      "level": "Error",
-      "message": "Cycle detected. \n  DocumentManagementBackend.Application -> DocumentManagementBackend.Infrastructure -> DocumentManagementBackend.Application.",
-      "projectPath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Application/DocumentManagementBackend.Application.csproj",
-      "filePath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Application/DocumentManagementBackend.Application.csproj",
-      "libraryId": "DocumentManagementBackend.Application",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  "logs": []
 }

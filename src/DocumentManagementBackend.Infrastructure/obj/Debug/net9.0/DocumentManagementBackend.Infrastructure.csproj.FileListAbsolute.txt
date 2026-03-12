@@ -23,6 +23,7 @@ C:/Users/Raducu-PetrisorPaun/source/repos/Radu101199/DocumentManagementBackend/s
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/obj/Debug/net9.0/DocumentManagementBackend.Infrastructure.csproj.CoreCompileInputs.cache
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/obj/Debug/net9.0/DocumentManagementBackend.Infrastructure.sourcelink.json
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/bin/Debug/net9.0/DocumentManagementBackend.Infrastructure.deps.json
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/bin/Debug/net9.0/DocumentManagementBackend.Infrastructure.runtimeconfig.json
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/bin/Debug/net9.0/DocumentManagementBackend.Infrastructure.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/bin/Debug/net9.0/DocumentManagementBackend.Infrastructure.pdb
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/bin/Debug/net9.0/DocumentManagementBackend.Application.dll
@@ -33,4 +34,5 @@ C:/Users/Raducu-PetrisorPaun/source/repos/Radu101199/DocumentManagementBackend/s
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/obj/Debug/net9.0/DocumentManagementBackend.Infrastructure.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/obj/Debug/net9.0/refint/DocumentManagementBackend.Infrastructure.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/obj/Debug/net9.0/DocumentManagementBackend.Infrastructure.pdb
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/obj/Debug/net9.0/DocumentManagementBackend.Infrastructure.genruntimeconfig.cache
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.Infrastructure/obj/Debug/net9.0/ref/DocumentManagementBackend.Infrastructure.dll
