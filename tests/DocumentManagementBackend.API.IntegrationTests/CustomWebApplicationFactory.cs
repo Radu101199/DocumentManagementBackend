@@ -1,3 +1,4 @@
+using DocumentManagementBackend.Application.Common.Interfaces;
 using DocumentManagementBackend.Domain.Entities;
 using DocumentManagementBackend.Domain.Enums;
 using DocumentManagementBackend.Domain.ValueObjects;
@@ -27,6 +28,12 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
             foreach (var descriptor in descriptors)
                 services.Remove(descriptor);
 
+            // ✅ Scoate și IApplicationDbContext
+            var appDbContextDescriptor = services
+                .FirstOrDefault(d => d.ServiceType == typeof(IApplicationDbContext));
+            if (appDbContextDescriptor != null)
+                services.Remove(appDbContextDescriptor);
+
             // Add SQLite in-memory
             _connection = new SqliteConnection("DataSource=:memory:");
             _connection.Open();
@@ -40,12 +47,16 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(_connection));
 
+            // ✅ Re-înregistrează IApplicationDbContext cu noul DbContext
+            services.AddScoped<IApplicationDbContext>(provider =>
+                provider.GetRequiredService<ApplicationDbContext>());
+
             var sp = services.BuildServiceProvider();
             using var scope = sp.CreateScope();
             var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             db.Database.EnsureCreated();
 
-            // Seed regular user
+            // Seed users
             var testUser = User.Create(
                 Email.Create("user@test.com"),
                 "Test", "User",
@@ -54,7 +65,6 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
             TestUserId = testUser.Id;
             db.Users.Add(testUser);
 
-            // Seed admin user
             var adminUser = User.Create(
                 Email.Create("admin@test.com"),
                 "Admin", "User",
