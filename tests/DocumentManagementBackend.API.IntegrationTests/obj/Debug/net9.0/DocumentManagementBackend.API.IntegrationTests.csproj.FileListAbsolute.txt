@@ -1105,3 +1105,4 @@ C:/Users/Raducu-PetrisorPaun/source/repos/Radu101199/DocumentManagementBackend/t
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.API.IntegrationTests/obj/Debug/net9.0/DocumentManagementBackend.API.IntegrationTests.pdb
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.API.IntegrationTests/obj/Debug/net9.0/DocumentManagementBackend.API.IntegrationTests.genruntimeconfig.cache
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.API.IntegrationTests/obj/Debug/net9.0/ref/DocumentManagementBackend.API.IntegrationTests.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.API.IntegrationTests/bin/Debug/net9.0/appsettings.Testing.json
