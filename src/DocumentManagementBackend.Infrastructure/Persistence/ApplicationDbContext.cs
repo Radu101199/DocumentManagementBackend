@@ -40,6 +40,16 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         modelBuilder.HasDefaultSchema("DocumentManagement");
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+        // SQLite nu suportă xmin (PostgreSQL-specific concurrency token)
+        if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
+        {
+            modelBuilder.Entity<Document>()
+                .Property<uint>("xmin")
+                .HasDefaultValue(0u)
+                .IsConcurrencyToken(false);
+        }
+
         base.OnModelCreating(modelBuilder);
     }
 }

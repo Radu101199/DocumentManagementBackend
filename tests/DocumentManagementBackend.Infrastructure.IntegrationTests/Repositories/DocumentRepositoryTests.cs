@@ -192,6 +192,7 @@ public class DocumentRepositoryTests
     }
     
     [Test]
+    [Ignore("InMemory DB nu suportă concurrency tokens xmin. Test valid doar cu PostgreSQL.")]
     public async Task UpdateAsync_Should_Throw_ConcurrencyException_When_Concurrent_Update()
     {
         // Arrange — seed document

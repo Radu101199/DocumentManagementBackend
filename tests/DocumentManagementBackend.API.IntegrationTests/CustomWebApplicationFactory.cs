@@ -33,6 +33,8 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 .FirstOrDefault(d => d.ServiceType == typeof(IApplicationDbContext));
             if (appDbContextDescriptor != null)
                 services.Remove(appDbContextDescriptor);
+            
+            services.AddMemoryCache();
 
             // Add SQLite in-memory
             _connection = new SqliteConnection("DataSource=:memory:");

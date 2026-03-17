@@ -101,7 +101,9 @@ public class ExceptionHandlingMiddleware
             status = (int)statusCode,
             message,
             errors,
-            traceId = context.TraceIdentifier // ✅ util pentru debugging
+            traceId = context.TraceIdentifier,
+            // TEMPORAR pentru debug:
+            // detail = exception.ToString()
         };
 
         await context.Response.WriteAsync(JsonSerializer.Serialize(response));
