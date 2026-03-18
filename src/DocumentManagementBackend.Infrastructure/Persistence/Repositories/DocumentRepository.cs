@@ -29,7 +29,6 @@ public class DocumentRepository : IDocumentRepository
     {
         return await _context.Documents
             .Where(d => d.OwnerId == ownerId)
-            .Include(d => d.Owner)
             .OrderByDescending(d => d.CreatedAt)
             .ToListAsync(cancellationToken);
     }

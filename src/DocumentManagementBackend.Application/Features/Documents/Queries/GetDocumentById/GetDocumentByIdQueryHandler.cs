@@ -23,7 +23,6 @@ public class GetDocumentByIdQueryHandler : IRequestHandler<GetDocumentByIdQuery,
         CancellationToken cancellationToken)
     {
         var document = await _context.Documents
-            .Include(d => d.Owner)
             .AsNoTracking()
             .Where(d => d.Id == request.Id)
             .Select(d => new DocumentDto(

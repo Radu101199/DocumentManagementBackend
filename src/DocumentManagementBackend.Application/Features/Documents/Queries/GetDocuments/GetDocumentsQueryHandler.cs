@@ -24,7 +24,6 @@ public class GetDocumentsQueryHandler : IRequestHandler<GetDocumentsQuery, Paged
         var pageSize = Math.Clamp(request.PageSize, 1, 100);
 
         var query = _context.Documents
-            .Include(d => d.Owner)
             .AsNoTracking()
             .AsQueryable();
 
