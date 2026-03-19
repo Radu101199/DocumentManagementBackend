@@ -1,7 +1,7 @@
 using System.Text;
 using Serilog;
 using DocumentManagementBackend.Application;
-using DocumentManagementBackend.Infrastructure;
+using DocumentManagementBackend.API.Configuration;
 using DocumentManagementBackend.API.Middleware;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,7 +16,7 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
 // Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerDocumentation();
 
 // Get current environment
 var env = builder.Environment.EnvironmentName;
@@ -56,8 +56,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerDocumentation();
 }
 
 app.UseMiddleware<CorrelationIdMiddleware>();

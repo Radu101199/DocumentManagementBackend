@@ -1,33 +1,48 @@
 using DocumentManagementBackend.Application.Common.Models;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using DocumentManagementBackend.Application.Features.Documents.Commands.CreateDocument;
 using DocumentManagementBackend.Application.Features.Documents.Commands.ApproveDocument;
-using DocumentManagementBackend.Application.Features.Documents.Commands.RejectDocument;
 using DocumentManagementBackend.Application.Features.Documents.Commands.CancelApproval;
+using DocumentManagementBackend.Application.Features.Documents.Commands.CreateDocument;
 using DocumentManagementBackend.Application.Features.Documents.Commands.MarkReviewed;
-using DocumentManagementBackend.Application.Features.Documents.Queries.GetDocuments;
+using DocumentManagementBackend.Application.Features.Documents.Commands.RejectDocument;
+using DocumentManagementBackend.Application.Features.Documents.Queries;
 using DocumentManagementBackend.Application.Features.Documents.Queries.GetDocumentById;
+using DocumentManagementBackend.Application.Features.Documents.Queries.GetDocuments;
 using DocumentManagementBackend.Domain.Enums;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DocumentManagementBackend.API.Controllers;
 
+/// <summary>Document management and approval workflow</summary>
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
+[Produces("application/json")]
 public class DocumentsController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public DocumentsController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    public DocumentsController(IMediator mediator) => _mediator = mediator;
 
-    /// <summary>Get paginated documents with filtering and sorting</summary>
+    /// <summary>Get paginated list of documents</summary>
+    /// <remarks>
+    /// Supports filtering by owner and status, and sorting by multiple fields.
+    /// 
+    /// Valid sortBy values: `title_asc`, `title_desc`, `createdAt_asc`, `createdAt_desc`, `status_asc`, `status_desc`
+    /// 
+    /// Sample request:
+    /// 
+    ///     GET /api/documents?page=1&amp;pageSize=20&amp;status=Draft&amp;sortBy=createdAt_desc
+    /// </remarks>
+    /// <param name="page">Page number (default: 1)</param>
+    /// <param name="pageSize">Items per page, max 100 (default: 20)</param>
+    /// <param name="ownerId">Filter by owner ID</param>
+    /// <param name="status">Filter by document status</param>
+    /// <param name="sortBy">Sort field and direction</param>
     [HttpGet]
     [ProducesResponseType(typeof(PagedResult<DocumentDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> GetAll(
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20,
@@ -35,79 +50,158 @@ public class DocumentsController : ControllerBase
         [FromQuery] DocumentStatus? status = null,
         [FromQuery] string? sortBy = null)
     {
-        var query = new GetDocumentsQuery(page, pageSize, ownerId, status, sortBy);
-        var result = await _mediator.Send(query);
+        var result = await _mediator.Send(new GetDocumentsQuery(page, pageSize, ownerId, status, sortBy));
         return Ok(result);
     }
 
-    /// <summary>Get document by ID</summary>
-    [HttpGet("{id}")]
+    /// <summary>Get a document by ID</summary>
+    /// <param name="id">Document ID</param>
+    [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(DocumentDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
-        var query = new GetDocumentByIdQuery(id);
-        var result = await _mediator.Send(query);
+        var result = await _mediator.Send(new GetDocumentByIdQuery(id));
         return Ok(result);
     }
 
+    /// <summary>Create a new document</summary>
+    /// <remarks>
+    /// Sample request:
+    /// 
+    ///     POST /api/documents
+    ///     {
+    ///         "title": "Q4 Financial Report",
+    ///         "description": "Quarterly financial summary",
+    ///         "fileName": "q4-report.pdf",
+    ///         "contentType": "application/pdf",
+    ///         "fileSizeBytes": 204800
+    ///     }
+    /// </remarks>
     [HttpPost]
     [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Create([FromBody] CreateDocumentCommand command)
     {
         var documentId = await _mediator.Send(command);
         return CreatedAtAction(nameof(GetById), new { id = documentId }, documentId);
     }
 
-    [HttpPost("{id}/review")]
+    /// <summary>Request approval for a document</summary>
+    /// <remarks>
+    /// Document must be in **Draft** status. Once submitted, it moves to **PendingReview**.
+    /// Only the document owner can request approval.
+    /// </remarks>
+    /// <param name="id">Document ID</param>
+    [HttpPost("{id:guid}/request-approval")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> MarkReviewed(Guid id, [FromBody] MarkReviewedRequest request)
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<IActionResult> RequestApproval(Guid id)
     {
-        var command = new MarkReviewedCommand(id, request.ReviewerId, request.Notes);
-        await _mediator.Send(command);
+        var userId = GetCurrentUserId();
+        await _mediator.Send(new ApproveDocumentCommand(id, userId, null));
         return NoContent();
     }
 
-    [HttpPost("{id}/approve")]
+    /// <summary>Approve a document (Admin only)</summary>
+    /// <remarks>
+    /// Document must be in **PendingReview** status.
+    /// Requires **Admin** role.
+    /// </remarks>
+    /// <param name="id">Document ID</param>
+    [HttpPost("{id:guid}/approve")]
     [Authorize(Roles = "Admin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Approve(Guid id, [FromBody] ApproveRequest request)
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<IActionResult> Approve(Guid id)
     {
-        var command = new ApproveDocumentCommand(id, request.ApproverId, request.Notes);
-        await _mediator.Send(command);
+        var userId = GetCurrentUserId();
+        await _mediator.Send(new ApproveDocumentCommand(id, userId, null));
         return NoContent();
     }
 
-    [HttpPost("{id}/reject")]
+    /// <summary>Reject a document (Admin only)</summary>
+    /// <remarks>
+    /// Document must be in **PendingReview** status.
+    /// Requires **Admin** role. A rejection reason is mandatory.
+    /// 
+    /// Sample request:
+    /// 
+    ///     POST /api/documents/{id}/reject
+    ///     {
+    ///         "reason": "Missing required attachments"
+    ///     }
+    /// </remarks>
+    /// <param name="id">Document ID</param>
+    /// <param name="command">Rejection reason</param>
+    [HttpPost("{id:guid}/reject")]
     [Authorize(Roles = "Admin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Reject(Guid id, [FromBody] RejectRequest request)
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<IActionResult> Reject(Guid id, [FromBody] RejectDocumentCommand command)
     {
-        var command = new RejectDocumentCommand(id, request.RejectorId, request.Reason);
-        await _mediator.Send(command);
+        await _mediator.Send(command with { DocumentId = id });
         return NoContent();
     }
 
-    [HttpPost("{id}/cancel")]
+    /// <summary>Cancel an approval request</summary>
+    /// <remarks>
+    /// Document must be in **PendingReview** status.
+    /// Only the document owner can cancel the approval request.
+    /// </remarks>
+    /// <param name="id">Document ID</param>
+    [HttpPost("{id:guid}/cancel")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CancelApproval(Guid id, [FromBody] CancelApprovalRequest request)
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<IActionResult> CancelApproval(Guid id)
     {
-        var command = new CancelApprovalCommand(id, request.CancelledById, request.Reason);
-        await _mediator.Send(command);
+        var userId = GetCurrentUserId();
+        await _mediator.Send(new CancelApprovalCommand(id, userId, null));
         return NoContent();
+    }
+
+    /// <summary>Mark a document as reviewed</summary>
+    /// <remarks>
+    /// Marks the document as reviewed without approving or rejecting.
+    /// Requires **Admin** role.
+    /// </remarks>
+    /// <param name="id">Document ID</param>
+    [HttpPost("{id:guid}/review")]
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<IActionResult> MarkReviewed(Guid id)
+    {
+        var userId = GetCurrentUserId();
+        await _mediator.Send(new MarkReviewedCommand(id, userId, null));
+        return NoContent();
+    }
+
+    private Guid GetCurrentUserId()
+    {
+        var claim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+        return Guid.TryParse(claim, out var id) ? id : Guid.Empty;
     }
 }
-
-public record MarkReviewedRequest(Guid ReviewerId, string? Notes);
-public record ApproveRequest(Guid ApproverId, string? Notes);
-public record RejectRequest(Guid RejectorId, string Reason);
-public record CancelApprovalRequest(Guid CancelledById, string? Reason);
