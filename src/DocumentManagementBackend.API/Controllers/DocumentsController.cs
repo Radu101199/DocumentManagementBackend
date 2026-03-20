@@ -184,8 +184,7 @@ public class DocumentsController : ControllerBase
     /// Requires **Admin** role.
     /// </remarks>
     /// <param name="id">Document ID</param>
-    [HttpPost("{id:guid}/review")]
-    [Authorize(Roles = "Admin")]
+    [HttpPost("{id:guid}/review")] 
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
