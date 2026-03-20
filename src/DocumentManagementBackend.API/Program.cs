@@ -82,6 +82,8 @@ app.UseSerilogRequestLogging(options =>
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
+    .AllowAnonymous();
 app.MapControllers();
 
 try

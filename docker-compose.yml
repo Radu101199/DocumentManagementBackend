@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+
   postgres:
     image: postgres:16-alpine
     container_name: documentmanagement-db
@@ -18,6 +19,33 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - documentmanagement-network
+
+  api:
+    build:
+      context: .
+      dockerfile: DocumentManagementBackend/Dockerfile
+    container_name: documentmanagement-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=mydatabase;Username=myuser;Password=mypassword;Search Path=DocumentManagement,public"
+      Jwt__Secret: "your-super-secret-key-min-32-characters!!"
+      Jwt__Issuer: "DocumentManagementBackend"
+      Jwt__Audience: "DocumentManagementFrontend"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - documentmanagement-network
+    restart: unless-stopped
+
+networks:
+  documentmanagement-network:
+    driver: bridge
 
 volumes:
   postgres_data:
