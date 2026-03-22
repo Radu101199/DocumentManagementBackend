@@ -5,6 +5,7 @@ using DocumentManagementBackend.API.Configuration;
 using DocumentManagementBackend.API.Middleware;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -85,6 +86,14 @@ app.UseAuthorization();
 app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
     .AllowAnonymous();
 app.MapControllers();
+
+// Auto-migrate la startup (doar PostgreSQL, nu SQLite)
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<DocumentManagementBackend.Infrastructure.Persistence.ApplicationDbContext>();
+    if (db.Database.ProviderName != "Microsoft.EntityFrameworkCore.Sqlite")
+        db.Database.Migrate();
+}
 
 try
 {
