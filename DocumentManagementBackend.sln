@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentManagementBackend.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentManagementBackend.Infrastructure.IntegrationTests", "tests\DocumentManagementBackend.Infrastructure.IntegrationTests\DocumentManagementBackend.Infrastructure.IntegrationTests.csproj", "{CAB7F03C-5758-4344-8D10-EA1DBFEB4624}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentManagementBackend.API.IntegrationTests.PostgreSQL", "tests\DocumentManagementBackend.API.IntegrationTests.PostgreSQL\DocumentManagementBackend.API.IntegrationTests.PostgreSQL.csproj", "{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -126,6 +128,18 @@ Global
 		{CAB7F03C-5758-4344-8D10-EA1DBFEB4624}.Release|x64.Build.0 = Release|Any CPU
 		{CAB7F03C-5758-4344-8D10-EA1DBFEB4624}.Release|x86.ActiveCfg = Release|Any CPU
 		{CAB7F03C-5758-4344-8D10-EA1DBFEB4624}.Release|x86.Build.0 = Release|Any CPU
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}.Debug|x64.Build.0 = Debug|Any CPU
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}.Debug|x86.Build.0 = Debug|Any CPU
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}.Release|x64.ActiveCfg = Release|Any CPU
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}.Release|x64.Build.0 = Release|Any CPU
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}.Release|x86.ActiveCfg = Release|Any CPU
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -139,5 +153,6 @@ Global
 		{79AAE01E-2D10-4471-8DA7-914133C7487D} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{BB1D96D7-4512-4236-B544-A559AD2F6310} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{CAB7F03C-5758-4344-8D10-EA1DBFEB4624} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+		{B87495E4-DD2A-4A95-9C6E-8D7E9AAB572A} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 	EndGlobalSection
 EndGlobal
