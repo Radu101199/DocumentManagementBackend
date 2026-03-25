@@ -51,11 +51,17 @@ public class ConcurrencyTests
             title = $"Test Doc {Guid.NewGuid()}",
             description = "Concurrency test",
             fileName = "test.pdf",
+            filePath = "/uploads/test.pdf",
             contentType = "application/pdf",
             fileSizeBytes = 1024,
-            ownerId = _factory.TestUserId
+            ownerId = _factory.TestUserId,
+            creatorId = _factory.TestUserId
         });
-        response.EnsureSuccessStatusCode();
+        if (!response.IsSuccessStatusCode)
+        {
+            var body = await response.Content.ReadAsStringAsync();
+            Assert.Fail($"Create failed ({response.StatusCode}): {body}");
+        }
         return await response.Content.ReadFromJsonAsync<Guid>();
     }
 

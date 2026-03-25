@@ -42,6 +42,27 @@ public class EdgeCaseTests
         _factory.Dispose();
     }
 
+    private async Task<Guid> CreateDocumentAsync(string title = "Test Document")
+    {
+        var response = await _userClient.PostAsJsonAsync("/api/documents", new
+        {
+            title,
+            description = "Test",
+            fileName = "test.pdf",
+            filePath = "/uploads/test.pdf",
+            contentType = "application/pdf",
+            fileSizeBytes = 1024,
+            ownerId = _factory.TestUserId,
+            creatorId = _factory.TestUserId
+        });
+        if (!response.IsSuccessStatusCode)
+        {
+            var body = await response.Content.ReadAsStringAsync();
+            Assert.Fail($"Create failed ({response.StatusCode}): {body}");
+        }
+        return await response.Content.ReadFromJsonAsync<Guid>();
+    }
+
     [Test]
     public async Task CreateDocument_With_Empty_Title_Should_Return_BadRequest()
     {
@@ -50,9 +71,11 @@ public class EdgeCaseTests
             title = "",
             description = "Test",
             fileName = "test.pdf",
+            filePath = "/uploads/test.pdf",
             contentType = "application/pdf",
             fileSizeBytes = 1024,
-            ownerId = _factory.TestUserId
+            ownerId = _factory.TestUserId,
+            creatorId = _factory.TestUserId
         });
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
     }
@@ -67,18 +90,9 @@ public class EdgeCaseTests
     [Test]
     public async Task ApproveDocument_Not_In_PendingReview_Should_Return_BadRequest()
     {
-        var createResponse = await _userClient.PostAsJsonAsync("/api/documents", new
-        {
-            title = "Draft Document",
-            description = "Test",
-            fileName = "test.pdf",
-            contentType = "application/pdf",
-            fileSizeBytes = 1024,
-            ownerId = _factory.TestUserId
-        });
-        createResponse.EnsureSuccessStatusCode();
-        var docId = await createResponse.Content.ReadFromJsonAsync<Guid>();
+        var docId = await CreateDocumentAsync("Draft Document");
 
+        // Încearcă să aprobă direct fără request-approval
         var approveResponse = await _adminClient.PostAsJsonAsync(
             $"/api/documents/{docId}/approve", new { });
         Assert.That(approveResponse.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
