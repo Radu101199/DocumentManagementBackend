@@ -1,7 +1,7 @@
+using DocumentManagementBackend.Application.Features.Auth.Commands.Login;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using DocumentManagementBackend.Application.Features.Auth.Commands.Login;
 
 namespace DocumentManagementBackend.API.Controllers;
 
