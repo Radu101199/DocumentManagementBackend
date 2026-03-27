@@ -48,11 +48,25 @@ public class UserRepository : IUserRepository
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var user = await GetByIdAsync(id, cancellationToken);
-        if (user != null)
+        await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+        try
         {
-            _context.Users.Remove(user);
+            var user = await GetByIdAsync(id, cancellationToken);
+            if (user == null)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                return;
+            }
+
+            user.SoftDelete(); // ← înlocuiește Remove()
+
             await _context.SaveChangesAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
+        }
+        catch
+        {
+            await transaction.RollbackAsync(cancellationToken);
+            throw;
         }
     }
 }

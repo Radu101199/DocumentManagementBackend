@@ -113,7 +113,7 @@ public class DocumentRepository : IDocumentRepository
                 return;
             }
 
-            _context.Documents.Remove(document);
+            document.SoftDelete(); // ← înlocuiește Remove()
 
             try
             {

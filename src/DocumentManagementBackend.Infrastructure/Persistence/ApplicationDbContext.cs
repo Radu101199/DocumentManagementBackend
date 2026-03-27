@@ -40,7 +40,14 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         modelBuilder.HasDefaultSchema("DocumentManagement");
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-
+        
+        // ✅ Soft Delete Global Filter — se aplică automat la TOATE query-urile
+        if (Database.ProviderName != "Microsoft.EntityFrameworkCore.Sqlite")
+        {
+            modelBuilder.Entity<Document>().HasQueryFilter(d => !d.IsDeleted);
+            modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsDeleted);
+        }
+        
         // SQLite nu suportă xmin (PostgreSQL-specific concurrency token)
         if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
         {
