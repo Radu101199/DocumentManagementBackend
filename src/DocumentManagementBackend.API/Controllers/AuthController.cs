@@ -2,12 +2,14 @@ using DocumentManagementBackend.Application.Features.Auth.Commands.Login;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace DocumentManagementBackend.API.Controllers;
 
 /// <summary>Authentication endpoints</summary>
 [ApiController]
 [Route("api/[controller]")]
+[EnableRateLimiting("auth")]
 [AllowAnonymous]
 [Produces("application/json")]
 public class AuthController : ControllerBase

@@ -11,6 +11,7 @@ using DocumentManagementBackend.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace DocumentManagementBackend.API.Controllers;
 
@@ -18,6 +19,7 @@ namespace DocumentManagementBackend.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
+[EnableRateLimiting("api")]
 [Produces("application/json")]
 public class DocumentsController : ControllerBase
 {
