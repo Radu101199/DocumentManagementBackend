@@ -4,6 +4,7 @@ using DocumentManagementBackend.Domain.Entities;
 using DocumentManagementBackend.Domain.Enums;
 using DocumentManagementBackend.Domain.ValueObjects;
 using DocumentManagementBackend.Infrastructure.Persistence;
+using DocumentManagementBackend.Infrastructure.Persistence.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
@@ -24,7 +25,7 @@ public class GetDocumentByIdQueryHandlerTests
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
-        _context = new ApplicationDbContext(options);
+        _context = new ApplicationDbContext(options, new AuditInterceptor());
         _handler = new GetDocumentByIdQueryHandler(_context);
 
         _testUser = User.Create(

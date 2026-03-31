@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -20,5 +20,8 @@
   <ItemGroup>
     <ProjectReference Include="..\DocumentManagementBackend.Application\DocumentManagementBackend.Application.csproj" />
     <ProjectReference Include="..\DocumentManagementBackend.Domain\DocumentManagementBackend.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistence\Interceptors\" />
   </ItemGroup>
 </Project>

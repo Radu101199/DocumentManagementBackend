@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using DocumentManagementBackend.Domain.Entities;
 using DocumentManagementBackend.Domain.ValueObjects;
 using DocumentManagementBackend.Infrastructure.Persistence;
+using DocumentManagementBackend.Infrastructure.Persistence.Interceptors;
 using DocumentManagementBackend.Infrastructure.Persistence.Repositories;
 using DocumentManagementBackend.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -26,7 +27,7 @@ public class DocumentRepositoryTests
             .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
             .Options;
 
-        _context = new ApplicationDbContext(options);
+        _context = new ApplicationDbContext(options, new AuditInterceptor());
         _dispatcherMock = new Mock<IDomainEventDispatcher>();
         _repository = new DocumentRepository(_context, _dispatcherMock.Object);
     }

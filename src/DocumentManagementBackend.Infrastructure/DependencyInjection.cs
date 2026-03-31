@@ -2,6 +2,7 @@ using DocumentManagementBackend.Application.Common.Interfaces;
 using DocumentManagementBackend.Domain.Interfaces;
 using DocumentManagementBackend.Infrastructure.Auth;
 using DocumentManagementBackend.Infrastructure.Persistence;
+using DocumentManagementBackend.Infrastructure.Persistence.Interceptors;
 using DocumentManagementBackend.Infrastructure.Persistence.Repositories;
 using DocumentManagementBackend.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,7 @@ public static class DependencyInjection
         services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
         services.AddScoped<IApplicationDbContext>(provider => 
             provider.GetRequiredService<ApplicationDbContext>());
+        services.AddScoped<AuditInterceptor>();
         
         return services;
     }

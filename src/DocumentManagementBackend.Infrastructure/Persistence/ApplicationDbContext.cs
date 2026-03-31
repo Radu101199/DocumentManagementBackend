@@ -1,19 +1,26 @@
 using Microsoft.EntityFrameworkCore;
 using DocumentManagementBackend.Application.Common.Interfaces;
 using DocumentManagementBackend.Domain.Entities;
+using DocumentManagementBackend.Infrastructure.Persistence.Interceptors;
 
 namespace DocumentManagementBackend.Infrastructure.Persistence;
 
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    private readonly AuditInterceptor _auditInterceptor;
+    
+    public ApplicationDbContext(
+        DbContextOptions<ApplicationDbContext> options,
+        AuditInterceptor auditInterceptor)
         : base(options)
     {
+        _auditInterceptor = auditInterceptor;
     }
 
     public DbSet<User> Users => Set<User>();
     public DbSet<Document> Documents => Set<Document>();
-
+    public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
+    
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         // ✅ Auto-set audit fields
@@ -58,5 +65,9 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         }
 
         base.OnModelCreating(modelBuilder);
+    }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.AddInterceptors(_auditInterceptor);
     }
 }

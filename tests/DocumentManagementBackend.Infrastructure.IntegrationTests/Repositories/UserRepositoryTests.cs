@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using DocumentManagementBackend.Domain.Entities;
 using DocumentManagementBackend.Domain.ValueObjects;
 using DocumentManagementBackend.Infrastructure.Persistence;
+using DocumentManagementBackend.Infrastructure.Persistence.Interceptors;
 using DocumentManagementBackend.Infrastructure.Persistence.Repositories;
 using NUnit.Framework;
 
@@ -19,7 +20,7 @@ public class UserRepositoryTests
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
 
-        _context = new ApplicationDbContext(options);
+        _context = new ApplicationDbContext(options, new AuditInterceptor());
         _repository = new UserRepository(_context);
     }
 
