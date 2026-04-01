@@ -1,5 +1,6 @@
+using System.Text.Json;
 using MediatR;
-using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 
 namespace DocumentManagementBackend.Application.Common.Behaviors;
@@ -13,10 +14,12 @@ public interface ICacheableQuery
 public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
-    private readonly IMemoryCache _cache;
+    private readonly IDistributedCache _cache;
     private readonly ILogger<CachingBehavior<TRequest, TResponse>> _logger;
 
-    public CachingBehavior(IMemoryCache cache, ILogger<CachingBehavior<TRequest, TResponse>> logger)
+    public CachingBehavior(
+        IDistributedCache cache,
+        ILogger<CachingBehavior<TRequest, TResponse>> logger)
     {
         _cache = cache;
         _logger = logger;
@@ -30,22 +33,29 @@ public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
         if (request is not ICacheableQuery cacheableQuery)
             return await next();
 
-        if (_cache.TryGetValue(cacheableQuery.CacheKey, out TResponse? cachedResponse))
+        // ✅ Cache Hit — caută în Redis
+        var cached = await _cache.GetStringAsync(cacheableQuery.CacheKey, cancellationToken);
+        if (cached is not null)
         {
             _logger.LogInformation("Cache hit for {CacheKey}", cacheableQuery.CacheKey);
-            return cachedResponse!;
+            return JsonSerializer.Deserialize<TResponse>(cached)!;
         }
 
+        // ✅ Cache Miss — execută query și stochează în Redis
         var response = await next();
 
-        _cache.Set(cacheableQuery.CacheKey, response,
-            new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = cacheableQuery.CacheDuration
-            });
+        var options = new DistributedCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow = cacheableQuery.CacheDuration
+        };
+
+        await _cache.SetStringAsync(
+            cacheableQuery.CacheKey,
+            JsonSerializer.Serialize(response),
+            options,
+            cancellationToken);
 
         _logger.LogInformation("Cache miss — stored {CacheKey}", cacheableQuery.CacheKey);
-
         return response;
     }
 }

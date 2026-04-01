@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FyIEosjzbnA=",
+  "dgSpecHash": "nXf9vUnr8lo=",
   "success": true,
   "projectFilePath": "/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/tests/DocumentManagementBackend.Application.UnitTests/DocumentManagementBackend.Application.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -35,6 +35,7 @@
     "/Users/paunradu/.nuget/packages/microsoft.entityframeworkcore.relational/9.0.1/microsoft.entityframeworkcore.relational.9.0.1.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/microsoft.extensions.caching.abstractions/9.0.1/microsoft.extensions.caching.abstractions.9.0.1.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/microsoft.extensions.caching.memory/9.0.1/microsoft.extensions.caching.memory.9.0.1.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/microsoft.extensions.caching.stackexchangeredis/9.0.1/microsoft.extensions.caching.stackexchangeredis.9.0.1.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.1/microsoft.extensions.configuration.abstractions.9.0.1.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.1/microsoft.extensions.dependencyinjection.9.0.1.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.1/microsoft.extensions.dependencyinjection.abstractions.9.0.1.nupkg.sha512",
@@ -63,6 +64,8 @@
     "/Users/paunradu/.nuget/packages/nunit/4.2.2/nunit.4.2.2.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/nunit.analyzers/4.4.0/nunit.analyzers.4.4.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/nunit3testadapter/4.6.0/nunit3testadapter.4.6.0.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/pipelines.sockets.unofficial/2.2.8/pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
+    "/Users/paunradu/.nuget/packages/stackexchange.redis/2.7.27/stackexchange.redis.2.7.27.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/system.codedom/6.0.0/system.codedom.6.0.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/system.collections.immutable/7.0.0/system.collections.immutable.7.0.0.nupkg.sha512",
     "/Users/paunradu/.nuget/packages/system.composition/7.0.0/system.composition.7.0.0.nupkg.sha512",

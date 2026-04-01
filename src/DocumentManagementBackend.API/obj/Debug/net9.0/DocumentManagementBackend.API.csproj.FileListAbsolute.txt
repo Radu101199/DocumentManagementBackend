@@ -350,3 +350,6 @@ C:/Users/Raducu-PetrisorPaun/source/repos/Radu101199/DocumentManagementBackend/s
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/logs/log-20260327.json
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/logs/log-20260330.json
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/logs/log-20260331.json
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Pipelines.Sockets.Unofficial.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/StackExchange.Redis.dll

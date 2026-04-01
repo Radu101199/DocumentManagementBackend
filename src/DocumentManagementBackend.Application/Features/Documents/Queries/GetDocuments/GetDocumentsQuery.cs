@@ -1,3 +1,4 @@
+using DocumentManagementBackend.Application.Common.Behaviors;
 using DocumentManagementBackend.Application.Common.Models;
 using DocumentManagementBackend.Domain.Enums;
 using MediatR;
@@ -10,4 +11,8 @@ public record GetDocumentsQuery(
     Guid? OwnerId = null,
     DocumentStatus? Status = null,
     string? SortBy = null
-) : IRequest<PagedResult<DocumentDto>>;
+) : IRequest<PagedResult<DocumentDto>>, ICacheableQuery
+{
+    public string CacheKey => $"documents:page={Page}:size={PageSize}:owner={OwnerId}:status={Status}:sort={SortBy}";
+    public TimeSpan CacheDuration => TimeSpan.FromMinutes(2);
+}

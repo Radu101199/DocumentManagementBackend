@@ -33,7 +33,22 @@ public static class DependencyInjection
         services.AddScoped<IApplicationDbContext>(provider => 
             provider.GetRequiredService<ApplicationDbContext>());
         services.AddScoped<AuditInterceptor>();
-        
+        // Redis Cache
+        var redisConnection = configuration["Redis:ConnectionString"];
+        if (!string.IsNullOrEmpty(redisConnection))
+        {
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = redisConnection;
+                options.InstanceName = "DocumentManagement:";
+            });
+        }
+        else
+        {
+            // Fallback la in-memory când Redis nu e configurat (dev/test)
+            services.AddDistributedMemoryCache();
+        }
+        services.AddScoped<ICacheService, CacheService>();
         return services;
     }
 }
