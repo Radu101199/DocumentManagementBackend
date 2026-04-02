@@ -22,6 +22,21 @@ services:
     networks:
       - documentmanagement-network
 
+  redis:
+    image: redis:7-alpine
+    container_name: documentmanagement-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - documentmanagement-network
+
   api:
     build:
       context: .
@@ -34,10 +49,13 @@ services:
       Jwt__Secret: "your-super-secret-key-min-32-characters!!"
       Jwt__Issuer: "DocumentManagementBackend"
       Jwt__Audience: "DocumentManagementFrontend"
+      Redis__ConnectionString: "documentmanagement-redis:6379"
     ports:
       - "8080:8080"
     depends_on:
       postgres:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     networks:
       - documentmanagement-network
@@ -49,3 +67,4 @@ networks:
 
 volumes:
   postgres_data:
+  redis_data:
