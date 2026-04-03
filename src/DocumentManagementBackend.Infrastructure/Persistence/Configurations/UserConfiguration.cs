@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using DocumentManagementBackend.Domain.Entities;
 using DocumentManagementBackend.Domain.Enums;
 using DocumentManagementBackend.Domain.ValueObjects;
@@ -12,7 +13,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         builder.HasKey(x => x.Id);
 
-        // Email as Value Object - store as string
         builder.Property(x => x.Email)
             .IsRequired()
             .HasMaxLength(256)
@@ -31,12 +31,16 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.PasswordHash)
             .IsRequired();
 
-        // Status instead of IsActive
         builder.Property(x => x.Status)
             .IsRequired()
             .HasConversion<string>();
 
-        // Roles as comma-separated string - access via backing field
+        // ✅ Roles cu ValueComparer — fix pentru warning
+        var rolesComparer = new ValueComparer<List<UserRole>>(
+            (a, b) => a != null && b != null && a.SequenceEqual(b),
+            r => r.Aggregate(0, (acc, v) => HashCode.Combine(acc, v.GetHashCode())),
+            r => r.ToList());
+
         builder.Property<List<UserRole>>("_roles")
             .HasColumnName("Roles")
             .HasConversion(
@@ -44,18 +48,17 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                 value => value.Split(',', StringSplitOptions.RemoveEmptyEntries)
                     .Select(r => Enum.Parse<UserRole>(r))
                     .ToList())
+            .Metadata.SetValueComparer(rolesComparer);
+
+        builder.Property<List<UserRole>>("_roles")
             .IsRequired();
 
         builder.HasIndex(x => x.Email)
             .IsUnique();
 
-        // Ignore computed property
         builder.Ignore(x => x.FullName);
-        
-        // Ignore the public Roles property
         builder.Ignore(x => x.Roles);
 
-        // Relationship: User -> Documents (one to many)
         builder.HasMany(x => x.Documents)
             .WithOne(x => x.Owner)
             .HasForeignKey(x => x.OwnerId)
