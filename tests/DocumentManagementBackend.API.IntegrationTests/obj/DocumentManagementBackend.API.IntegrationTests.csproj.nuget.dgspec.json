@@ -324,6 +324,18 @@
               "target": "Package",
               "version": "[4.1.0, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.8.14, )"
+            },
+            "Hangfire.Core": {
+              "target": "Package",
+              "version": "[1.8.14, )"
+            },
+            "Hangfire.PostgreSql": {
+              "target": "Package",
+              "version": "[1.20.9, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[9.0.1, )"

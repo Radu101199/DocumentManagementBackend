@@ -1,10 +1,13 @@
 using DocumentManagementBackend.Application.Common.Interfaces;
 using DocumentManagementBackend.Domain.Interfaces;
 using DocumentManagementBackend.Infrastructure.Auth;
+using DocumentManagementBackend.Infrastructure.Jobs;
 using DocumentManagementBackend.Infrastructure.Persistence;
 using DocumentManagementBackend.Infrastructure.Persistence.Interceptors;
 using DocumentManagementBackend.Infrastructure.Persistence.Repositories;
 using DocumentManagementBackend.Infrastructure.Services;
+using Hangfire;
+using Hangfire.PostgreSql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -49,6 +52,24 @@ public static class DependencyInjection
             services.AddDistributedMemoryCache();
         }
         services.AddScoped<ICacheService, CacheService>();
+        // Hangfire
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        services.AddHangfire(config => config
+            .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseRecommendedSerializerSettings()
+            .UsePostgreSqlStorage(options =>
+                options.UseNpgsqlConnection(connectionString)));
+
+        services.AddHangfireServer(options =>
+        {
+            options.WorkerCount = 2;
+            options.Queues = new[] { "critical", "default", "low" };
+        });
+
+        services.AddScoped<IBackgroundJobService, HangfireBackgroundJobService>();
+        services.AddScoped<EmailJob>();
+        services.AddScoped<CleanupJob>();
         return services;
     }
 }

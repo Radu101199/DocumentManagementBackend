@@ -9,13 +9,17 @@ namespace DocumentManagementBackend.Application.Features.Documents.EventHandlers
 public class DocumentCreatedEventHandler : INotificationHandler<DomainEventNotification<DocumentCreatedEvent>>
 {
     private readonly INotificationService _notificationService;
+    private readonly IBackgroundJobService _backgroundJobService;
     private readonly ILogger<DocumentCreatedEventHandler> _logger;
 
+    
     public DocumentCreatedEventHandler(
         INotificationService notificationService,
+        IBackgroundJobService backgroundJobService,
         ILogger<DocumentCreatedEventHandler> logger)
     {
         _notificationService = notificationService;
+        _backgroundJobService = backgroundJobService;
         _logger = logger;
     }
 
@@ -27,7 +31,12 @@ public class DocumentCreatedEventHandler : INotificationHandler<DomainEventNotif
             "Document {DocumentId} created by {CreatorId}",
             domainEvent.DocumentId,
             domainEvent.ActorId);
+        
+        // ✅ Fire-and-forget — nu blochează request-ul
+        //TODO modificat aici _backgroundJobService.Enqueue<EmailJob>(job =>
+        //     job.SendDocumentCreatedEmailAsync(domainEvent.DocumentId, "owner@example.com"));
 
+        
         await _notificationService.NotifyDocumentCreatedAsync(
             domainEvent.DocumentId,
             domainEvent.ActorId,

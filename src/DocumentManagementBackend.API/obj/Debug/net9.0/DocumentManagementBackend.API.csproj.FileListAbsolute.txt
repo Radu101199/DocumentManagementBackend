@@ -353,3 +353,9 @@ C:/Users/Raducu-PetrisorPaun/source/repos/Radu101199/DocumentManagementBackend/s
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Pipelines.Sockets.Unofficial.dll
 /Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/StackExchange.Redis.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Dapper.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Hangfire.AspNetCore.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Hangfire.Core.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Hangfire.NetCore.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Hangfire.PostgreSql.dll
+/Users/paunradu/Developer/Programare/SideProj/DocumentManagementBackend/DocumentManagementBackend/src/DocumentManagementBackend.API/bin/Debug/net9.0/Newtonsoft.Json.dll

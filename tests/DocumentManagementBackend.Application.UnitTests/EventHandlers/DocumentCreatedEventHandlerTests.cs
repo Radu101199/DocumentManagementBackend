@@ -12,6 +12,7 @@ namespace DocumentManagementBackend.Application.UnitTests.EventHandlers;
 public class DocumentCreatedEventHandlerTests
 {
     private Mock<INotificationService> _notificationServiceMock = null!;
+    private Mock<IBackgroundJobService> _backgroundJobServiceMock = null!;
     private Mock<ILogger<DocumentCreatedEventHandler>> _loggerMock = null!;
     private DocumentCreatedEventHandler _handler = null!;
 
@@ -22,6 +23,7 @@ public class DocumentCreatedEventHandlerTests
         _loggerMock = new Mock<ILogger<DocumentCreatedEventHandler>>();
         _handler = new DocumentCreatedEventHandler(
             _notificationServiceMock.Object,
+            _backgroundJobServiceMock.Object,
             _loggerMock.Object);
     }
 
