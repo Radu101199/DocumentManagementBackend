@@ -33,9 +33,10 @@ public static class DependencyInjection
         services.AddScoped<IEmailService, MockEmailService>();
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
-        services.AddScoped<IApplicationDbContext>(provider => 
+        services.AddScoped<IApplicationDbContext>(provider =>
             provider.GetRequiredService<ApplicationDbContext>());
         services.AddScoped<AuditInterceptor>();
+
         // Redis Cache
         var redisConnection = configuration["Redis:ConnectionString"];
         if (!string.IsNullOrEmpty(redisConnection))
@@ -48,28 +49,38 @@ public static class DependencyInjection
         }
         else
         {
-            // Fallback la in-memory când Redis nu e configurat (dev/test)
             services.AddDistributedMemoryCache();
         }
         services.AddScoped<ICacheService, CacheService>();
-        // Hangfire
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
-        services.AddHangfire(config => config
-            .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
-            .UseSimpleAssemblyNameTypeSerializer()
-            .UseRecommendedSerializerSettings()
-            .UsePostgreSqlStorage(options =>
-                options.UseNpgsqlConnection(connectionString)));
 
-        services.AddHangfireServer(options =>
+        // Hangfire — doar în afara Testing
+        if (environment != "Testing")
         {
-            options.WorkerCount = 2;
-            options.Queues = new[] { "critical", "default", "low" };
-        });
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            services.AddHangfire(config => config
+                .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UsePostgreSqlStorage(options =>
+                    options.UseNpgsqlConnection(connectionString)));
 
-        services.AddScoped<IBackgroundJobService, HangfireBackgroundJobService>();
+            services.AddHangfireServer(options =>
+            {
+                options.WorkerCount = 2;
+                options.Queues = new[] { "critical", "default", "low" };
+            });
+
+            services.AddScoped<IBackgroundJobService, HangfireBackgroundJobService>();
+        }
+        else
+        {
+            // Fallback pentru teste — no-op implementation
+            services.AddScoped<IBackgroundJobService, NoOpBackgroundJobService>();
+        }
+
         services.AddScoped<EmailJob>();
         services.AddScoped<CleanupJob>();
+
         return services;
     }
 }

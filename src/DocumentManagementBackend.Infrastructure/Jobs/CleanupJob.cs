@@ -15,7 +15,6 @@ public class CleanupJob
         _logger = logger;
     }
 
-    // Șterge fizic documentele soft-deleted de mai mult de 30 zile
     public async Task PurgeOldDeletedDocumentsAsync()
     {
         var cutoff = DateTime.UtcNow.AddDays(-30);

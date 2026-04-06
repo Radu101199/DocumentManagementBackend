@@ -17,18 +17,16 @@ public class EmailJob
     public async Task SendDocumentCreatedEmailAsync(Guid documentId, string ownerEmail)
     {
         _logger.LogInformation("Sending document created email for {DocumentId}", documentId);
-
         await _emailService.SendAsync(new EmailMessage(
             To: ownerEmail,
             Subject: "Document Created Successfully",
-            Body: $"Your document {documentId} has been created and is ready for review.",
+            Body: $"Your document {documentId} has been created.",
             IsHtml: false));
     }
 
     public async Task SendApprovalRequestEmailAsync(Guid documentId, string adminEmail)
     {
         _logger.LogInformation("Sending approval request email for {DocumentId}", documentId);
-
         await _emailService.SendAsync(new EmailMessage(
             To: adminEmail,
             Subject: "Document Awaiting Approval",
@@ -39,11 +37,20 @@ public class EmailJob
     public async Task SendDocumentApprovedEmailAsync(Guid documentId, string ownerEmail)
     {
         _logger.LogInformation("Sending approved email for {DocumentId}", documentId);
-
         await _emailService.SendAsync(new EmailMessage(
             To: ownerEmail,
             Subject: "Document Approved",
             Body: $"Your document {documentId} has been approved.",
+            IsHtml: false));
+    }
+
+    public async Task SendDocumentRejectedEmailAsync(Guid documentId, string ownerEmail, string reason)
+    {
+        _logger.LogInformation("Sending rejected email for {DocumentId}", documentId);
+        await _emailService.SendAsync(new EmailMessage(
+            To: ownerEmail,
+            Subject: "Document Rejected",
+            Body: $"Your document {documentId} has been rejected. Reason: {reason}",
             IsHtml: false));
     }
 }
