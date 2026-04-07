@@ -205,4 +205,26 @@ public class DocumentsController : ControllerBase
         var claim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
         return Guid.TryParse(claim, out var id) ? id : Guid.Empty;
     }
+    
+    /// <summary>Save a version snapshot of the document</summary>
+    [HttpPost("{id:guid}/versions")]
+    [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> SaveVersion(Guid id, [FromBody] SaveVersionRequest request)
+    {
+        var userId = GetCurrentUserId();
+        var versionNumber = await _mediator.Send(
+            new SaveVersionCommand(id, userId, request.Comment));
+        return Ok(new { versionNumber });
+    }
+
+    /// <summary>Get version history of a document</summary>
+    [HttpGet("{id:guid}/versions")]
+    [ProducesResponseType(typeof(List<DocumentVersionDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetVersions(Guid id)
+    {
+        var versions = await _mediator.Send(new GetDocumentVersionsQuery(id));
+        return Ok(versions);
+    }
 }

@@ -29,6 +29,10 @@ public class Document : BaseAuditableEntity
     // Navigation property (EF Core needs setter, dar e controlat)
     public User Owner { get; private set; } = null!;
 
+    // Versions
+    public ICollection<DocumentVersion> Versions { get; private set; } = new List<DocumentVersion>();
+    public int CurrentVersionNumber { get; private set; } = 0;
+    
     // Domain Events (read-only collection)
     [NotMapped]
     public IReadOnlyCollection<BaseDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
@@ -194,7 +198,17 @@ public class Document : BaseAuditableEntity
 
         Status = DocumentStatus.Archived;
     }
+    
+    public DocumentVersion SaveVersion(string? comment, string? savedBy)
+    {
+        if (Status == DocumentStatus.Archived)
+            throw new DocumentInvalidStateException(Id, Status.ToString(), "save version");
 
+        CurrentVersionNumber++;
+        var version = DocumentVersion.CreateSnapshot(this, CurrentVersionNumber, comment, savedBy);
+        return version;
+    }
+    
     public void ClearDomainEvents()
     {
         _domainEvents.Clear();

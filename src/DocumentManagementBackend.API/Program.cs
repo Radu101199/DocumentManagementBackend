@@ -122,23 +122,23 @@ app.UseRateLimiter();
 // ✅ Ordinea corectă a middleware-ului
 app.UseAuthentication();
 app.UseAuthorization();
-// Hangfire Dashboard — vizibil la /hangfire
-app.UseHangfireDashboard("/hangfire", new DashboardOptions
+// Hangfire — doar în afara Testing
+if (!app.Environment.IsEnvironment("Testing"))
 {
-    IsReadOnlyFunc = _ => false,
-    Authorization = new[] { new Hangfire.Dashboard.LocalRequestsOnlyAuthorizationFilter() }
-});
+    app.UseHangfireDashboard("/hangfire", new DashboardOptions
+    {
+        IsReadOnlyFunc = _ => false,
+        Authorization = new[] { new Hangfire.Dashboard.LocalRequestsOnlyAuthorizationFilter() }
+    });
 
-// Recurring Jobs — înregistrate la startup
-using (var scope = app.Services.CreateScope())
-{
-    var recurringJobs = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
-    
-    // Rulează zilnic la miezul nopții
-    recurringJobs.AddOrUpdate<CleanupJob>(
-        "purge-deleted-documents",
-        job => job.PurgeOldDeletedDocumentsAsync(),
-        Cron.Daily);
+    using (var scope = app.Services.CreateScope())
+    {
+        var recurringJobs = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
+        recurringJobs.AddOrUpdate<CleanupJob>(
+            "purge-deleted-documents",
+            job => job.PurgeOldDeletedDocumentsAsync(),
+            Cron.Daily);
+    }
 }
 
 app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))

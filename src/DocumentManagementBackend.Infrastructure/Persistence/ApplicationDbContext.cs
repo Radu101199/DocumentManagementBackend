@@ -19,6 +19,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
     public DbSet<User> Users => Set<User>();
     public DbSet<Document> Documents => Set<Document>();
+    public DbSet<DocumentVersion> DocumentVersions => Set<DocumentVersion>();
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
     
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
