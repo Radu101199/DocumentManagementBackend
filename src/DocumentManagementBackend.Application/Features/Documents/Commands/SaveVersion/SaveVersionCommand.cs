@@ -7,3 +7,5 @@ public record SaveVersionCommand(
     Guid UserId,
     string? Comment
 ) : IRequest<int>;  // returnează numărul versiunii
+
+public record SaveVersionRequest(string? Comment);

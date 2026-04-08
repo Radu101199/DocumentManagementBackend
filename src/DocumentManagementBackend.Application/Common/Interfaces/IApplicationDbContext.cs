@@ -7,6 +7,8 @@ public interface IApplicationDbContext
 {
     DbSet<User> Users { get; }
     DbSet<Document> Documents { get; }
+    DbSet<DocumentVersion> DocumentVersions { get; }
+
     DbSet<AuditLog> AuditLogs { get;  }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
