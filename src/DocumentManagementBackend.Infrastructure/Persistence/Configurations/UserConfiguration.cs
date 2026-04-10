@@ -40,18 +40,17 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             (a, b) => a != null && b != null && a.SequenceEqual(b),
             r => r.Aggregate(0, (acc, v) => HashCode.Combine(acc, v.GetHashCode())),
             r => r.ToList());
-
+        
         builder.Property<List<UserRole>>("_roles")
             .HasColumnName("Roles")
+            .IsRequired()
             .HasConversion(
                 roles => string.Join(",", roles.Select(r => r.ToString())),
                 value => value.Split(',', StringSplitOptions.RemoveEmptyEntries)
                     .Select(r => Enum.Parse<UserRole>(r))
                     .ToList())
             .Metadata.SetValueComparer(rolesComparer);
-
-        builder.Property<List<UserRole>>("_roles")
-            .IsRequired();
+        
 
         builder.HasIndex(x => x.Email)
             .IsUnique();

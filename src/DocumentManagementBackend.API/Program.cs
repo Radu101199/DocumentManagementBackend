@@ -8,6 +8,7 @@ using DocumentManagementBackend.Infrastructure.Jobs;
 using Hangfire;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,8 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerDocumentation();
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo("/app/.aspnet/DataProtection-Keys"));
 
 // Get current environment
 var env = builder.Environment.EnvironmentName;
@@ -116,7 +119,11 @@ app.UseSerilogRequestLogging(options =>
             diagnosticContext.Set("UserId", httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value);
         }
     };
-});app.UseHttpsRedirection();
+});
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseRateLimiter();
 // ✅ Ordinea corectă a middleware-ului
