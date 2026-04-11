@@ -54,6 +54,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         {
             modelBuilder.Entity<Document>().HasQueryFilter(d => !d.IsDeleted);
             modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsDeleted);
+            modelBuilder.Entity<DocumentVersion>().HasQueryFilter(v => !v.Document.IsDeleted);
         }
         
         // SQLite nu suportă xmin (PostgreSQL-specific concurrency token)
