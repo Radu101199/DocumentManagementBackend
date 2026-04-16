@@ -95,7 +95,6 @@ public class DocumentsController : ControllerBase
 
     /// <summary>Request approval for a document</summary>
     /// <remarks>
-    /// Document must be in **Draft** status. Once submitted, it moves to **PendingReview**.
     /// Only the document owner can request approval.
     /// </remarks>
     /// <param name="id">Document ID</param>
@@ -115,7 +114,6 @@ public class DocumentsController : ControllerBase
 
     /// <summary>Approve a document (Admin only)</summary>
     /// <remarks>
-    /// Document must be in **PendingReview** status.
     /// Requires **Admin** role.
     /// </remarks>
     /// <param name="id">Document ID</param>
@@ -136,7 +134,6 @@ public class DocumentsController : ControllerBase
 
     /// <summary>Reject a document (Admin only)</summary>
     /// <remarks>
-    /// Document must be in **PendingReview** status.
     /// Requires **Admin** role. A rejection reason is mandatory.
     /// 
     /// Sample request:
@@ -164,7 +161,6 @@ public class DocumentsController : ControllerBase
 
     /// <summary>Cancel an approval request</summary>
     /// <remarks>
-    /// Document must be in **PendingReview** status.
     /// Only the document owner can cancel the approval request.
     /// </remarks>
     /// <param name="id">Document ID</param>
