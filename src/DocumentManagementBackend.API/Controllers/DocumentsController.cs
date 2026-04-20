@@ -1,7 +1,9 @@
+using System.Security.Claims;
 using DocumentManagementBackend.Application.Common.Models;
 using DocumentManagementBackend.Application.Features.Documents.Commands.ApproveDocument;
 using DocumentManagementBackend.Application.Features.Documents.Commands.CancelApproval;
 using DocumentManagementBackend.Application.Features.Documents.Commands.CreateDocument;
+using DocumentManagementBackend.Application.Features.Documents.Commands.DeleteDocument;
 using DocumentManagementBackend.Application.Features.Documents.Commands.MarkReviewed;
 using DocumentManagementBackend.Application.Features.Documents.Commands.RejectDocument;
 using DocumentManagementBackend.Application.Features.Documents.Commands.SaveVersion;
@@ -216,7 +218,24 @@ public class DocumentsController : ControllerBase
             new SaveVersionCommand(id, userId, request.Comment));
         return Ok(new { versionNumber });
     }
-
+    
+    /// <summary>
+    /// Soft delete document.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="ct"></param>
+    /// <returns></returns>
+    [HttpDelete("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<IActionResult> DeleteDocument(Guid id, CancellationToken ct)
+    {
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        await _mediator.Send(new DeleteDocumentCommand(id, userId), ct);
+        return NoContent();
+    }
+    
     /// <summary>Get version history of a document</summary>
     [HttpGet("{id:guid}/versions")]
     [ProducesResponseType(typeof(List<DocumentVersionDto>), StatusCodes.Status200OK)]
