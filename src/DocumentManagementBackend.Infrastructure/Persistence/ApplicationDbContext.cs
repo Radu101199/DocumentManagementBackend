@@ -8,13 +8,16 @@ namespace DocumentManagementBackend.Infrastructure.Persistence;
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     private readonly AuditInterceptor _auditInterceptor;
+    private readonly ICurrentUserService _currentUserService;
     
     public ApplicationDbContext(
         DbContextOptions<ApplicationDbContext> options,
-        AuditInterceptor auditInterceptor)
+        AuditInterceptor auditInterceptor,
+        ICurrentUserService currentUserService)
         : base(options)
     {
         _auditInterceptor = auditInterceptor;
+        _currentUserService = currentUserService;
     }
 
     public DbSet<User> Users => Set<User>();
@@ -37,6 +40,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                     break;
                 case EntityState.Modified:
                     entry.Entity.UpdatedAt = DateTime.UtcNow;
+                    entry.Entity.UpdatedBy = _currentUserService.UserId;
                     break;
             }
         }

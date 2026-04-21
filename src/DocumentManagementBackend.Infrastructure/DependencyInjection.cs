@@ -31,6 +31,8 @@ public static class DependencyInjection
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IJwtTokenService, JwtTokenService>();
         services.AddScoped<IEmailService, MockEmailService>();
+        services.AddHttpContextAccessor();
+        services.AddScoped<ICurrentUserService,CurrentUserService> ();
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
         services.AddScoped<IApplicationDbContext>(provider =>

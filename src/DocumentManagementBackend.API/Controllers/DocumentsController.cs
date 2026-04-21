@@ -231,7 +231,7 @@ public class DocumentsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> DeleteDocument(Guid id, CancellationToken ct)
     {
-        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         await _mediator.Send(new DeleteDocumentCommand(id, userId), ct);
         return NoContent();
     }
