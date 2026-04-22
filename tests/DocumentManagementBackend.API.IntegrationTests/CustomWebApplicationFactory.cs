@@ -27,6 +27,16 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 .ToList();
             foreach (var descriptor in descriptors)
                 services.Remove(descriptor);
+            
+            // Scoate CurrentUserService real (care cere IHttpContextAccessor)
+            var currentUserDescriptor = services
+                .FirstOrDefault(d => d.ServiceType == typeof(ICurrentUserService));
+            if (currentUserDescriptor != null)
+                services.Remove(currentUserDescriptor);
+
+            // Înregistrează mock-ul pentru teste
+            services.AddScoped<ICurrentUserService>(_ => 
+                new TestCurrentUserService(TestUserId.ToString()));
 
             // ✅ Scoate și IApplicationDbContext
             var appDbContextDescriptor = services
