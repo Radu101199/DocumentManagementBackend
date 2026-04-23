@@ -1,3 +1,4 @@
+using DocumentManagementBackend.API.IntegrationTests;
 using DocumentManagementBackend.Application.Common.Exceptions;
 using DocumentManagementBackend.Application.Features.Documents.Queries.GetDocumentById;
 using DocumentManagementBackend.Domain.Entities;
@@ -26,7 +27,7 @@ public class GetDocumentByIdQueryHandlerTests
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
-        _context = new ApplicationDbContext(options, new AuditInterceptor(), new CurrentUserService());
+        _context = new ApplicationDbContext(options, new AuditInterceptor(), new TestCurrentUserService("11111111-1111-1111-1111-111111111111"));
         _handler = new GetDocumentByIdQueryHandler(_context);
 
         _testUser = User.Create(

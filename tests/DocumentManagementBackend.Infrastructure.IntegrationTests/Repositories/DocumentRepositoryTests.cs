@@ -27,7 +27,7 @@ public class DocumentRepositoryTests
             .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
             .Options;
 
-        _context = new ApplicationDbContext(options, new AuditInterceptor());
+        _context = new ApplicationDbContext(options, new AuditInterceptor(), new TestCurrentUserService("11111111-1111-1111-1111-111111111111"));
         _dispatcherMock = new Mock<IDomainEventDispatcher>();
         _repository = new DocumentRepository(_context, _dispatcherMock.Object);
     }

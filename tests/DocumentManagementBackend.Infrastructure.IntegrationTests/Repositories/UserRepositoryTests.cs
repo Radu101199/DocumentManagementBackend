@@ -4,6 +4,7 @@ using DocumentManagementBackend.Domain.ValueObjects;
 using DocumentManagementBackend.Infrastructure.Persistence;
 using DocumentManagementBackend.Infrastructure.Persistence.Interceptors;
 using DocumentManagementBackend.Infrastructure.Persistence.Repositories;
+using DocumentManagementBackend.Infrastructure.Services;
 using NUnit.Framework;
 
 namespace DocumentManagementBackend.Infrastructure.IntegrationTests.Repositories;
@@ -20,7 +21,7 @@ public class UserRepositoryTests
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
 
-        _context = new ApplicationDbContext(options, new AuditInterceptor());
+        _context = new ApplicationDbContext(options, new AuditInterceptor(), new TestCurrentUserService("11111111-1111-1111-1111-111111111111"));
         _repository = new UserRepository(_context);
     }
 

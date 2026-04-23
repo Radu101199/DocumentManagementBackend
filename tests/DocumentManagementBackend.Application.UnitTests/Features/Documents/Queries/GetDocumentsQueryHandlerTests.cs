@@ -1,3 +1,4 @@
+using DocumentManagementBackend.API.IntegrationTests;
 using DocumentManagementBackend.Application.Features.Documents.Queries.GetDocuments;
 using DocumentManagementBackend.Domain.Entities;
 using DocumentManagementBackend.Domain.Enums;
@@ -24,7 +25,7 @@ public class GetDocumentsQueryHandlerTests
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
-        _context = new ApplicationDbContext(options, new AuditInterceptor(), new CurrentUserService());
+        _context = new ApplicationDbContext(options, new AuditInterceptor(), new TestCurrentUserService("11111111-1111-1111-1111-111111111111"));
         _handler = new GetDocumentsQueryHandler(_context);
 
         // Seed user
