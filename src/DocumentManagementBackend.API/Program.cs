@@ -135,7 +135,7 @@ if (!app.Environment.IsEnvironment("Testing"))
     app.UseHangfireDashboard("/hangfire", new DashboardOptions
     {
         IsReadOnlyFunc = _ => false,
-        Authorization = new[] { new Hangfire.Dashboard.LocalRequestsOnlyAuthorizationFilter() }
+        Authorization = new[] { new HangfireAllowAllFilter() }
     });
 
     using (var scope = app.Services.CreateScope())
