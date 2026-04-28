@@ -29,6 +29,7 @@ public static class DependencyInjection
 
         services.AddScoped<IDocumentRepository, DocumentRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IDocumentVersionRepository, DocumentVersionRepository>();
         services.AddScoped<IJwtTokenService, JwtTokenService>();
         services.AddScoped<IEmailService, MockEmailService>();
         services.AddHttpContextAccessor();
